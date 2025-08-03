@@ -4,6 +4,7 @@ import Nabver from "../Component/Navber/Nabver";
 import Fotter from "../Component/Fotter/Fotter";
 import { useContext, useEffect, useState } from "react";
 import AuthContext from "../AuthProvider.jsx/AuhtContext";
+import { ToastContainer } from "react-toastify";
 
 
 const Mainlayout = () => {
@@ -23,6 +24,7 @@ const Mainlayout = () => {
       ) : (
         <div className={`${day ? "bg-black" : "bg-white"}`}>
           <Nabver></Nabver>
+            <ToastContainer />
 
           <div className=" min-h-[calc(100vh-300px)]  ">
             <Outlet></Outlet>

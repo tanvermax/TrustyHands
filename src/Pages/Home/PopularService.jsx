@@ -3,7 +3,8 @@ import "./sevice.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import AuthContext from "../../AuthProvider.jsx/AuhtContext";
-import ServiceCard from "../../Component/ServiceCard/ServiceCard";
+import { ServiceCard } from "../Service/AllService";
+// import ServiceCard from "../../Component/ServiceCard/ServiceCard";
 
 const PopularService = () => {
   const { day } = useContext(AuthContext);
@@ -44,7 +45,8 @@ const PopularService = () => {
         data-aos="fade-up"
       >
         {data.map((card) => (
-          <ServiceCard key={card._id} card={card} day={day} />
+          <ServiceCard key={card._id} card={card} day={day}/>
+          // <ServiceCard  />
         ))}
       </div>
     </div>

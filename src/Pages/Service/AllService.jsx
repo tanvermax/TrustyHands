@@ -5,39 +5,40 @@ import { CiSearch } from "react-icons/ci";
 import { Link, useLoaderData } from "react-router-dom";
 import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 
-const ServiceCard = ({ card, day }) => {
+export const ServiceCard = ({ card, day }) => {
   return (
-    <div className="card bg-white dark:bg-gray-800 shadow-lg rounded-xl overflow-hidden transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
-      <figure className="relative">
-        <img className="h-64 w-full object-cover" src={card.imageUrl} alt={card.serviceName} />
-        <div className="absolute top-2 right-2 bg-primary text-white px-2 py-1 rounded-full text-xs font-semibold">
+    <div className="bg-gradient-to-br from-[#fafafa] to-[#5f615f44] rounded-2xl p-4 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1">
+      <div className="relative overflow-hidden rounded-xl">
+        <img
+          className="w-full h-60 object-cover rounded-xl border border-gray-700"
+          src={card.imageUrl}
+          alt={card.serviceName}
+        />
+        <div className="absolute top-3 left-3 bg-black bg-opacity-60 text-white text-xs font-semibold px-3 py-1 rounded-full">
+          {card.serviceArea}
+        </div>
+        <div className="absolute top-3 right-3 bg-primary text-white text-sm font-semibold px-3 py-1 rounded-full">
           ${card.price}
         </div>
-      </figure>
-      <div className="card-body p-6">
-        <h2 className={`text-xl font-bold ${day ? "text-white" : "text-gray-900"} mb-2`}>
-          {card.serviceName}
-        </h2>
-        <p className={`text-sm ${day ? "text-gray-300" : "text-gray-600"} line-clamp-3 mb-4`}>
-          {card.description} in{" "}
-          <span className="badge bg-secondary text-white px-2 py-1 rounded-md text-xs font-semibold">
-            {card.serviceArea}
-          </span>
-        </p>
-        <div className="flex items-center justify-between mb-4">
+      </div>
+
+      <div className="mt-4 px-1">
+        <h3 className="text-lg font-bold text-white truncate">{card.serviceName}</h3>
+        <p className="text-sm text-gray-400 mt-1 line-clamp-2">{card.description}</p>
+
+        <div className="flex items-center justify-between ">
           <div className="flex items-center gap-2">
             <img
-              className="h-10 w-10 rounded-full border-2 border-warning object-cover"
+              className="w-8 h-8 rounded-full border-2 border-primary"
               src={card.providerphoto}
               alt={card.providername}
             />
-            <span className={`text-sm font-medium ${day ? "text-gray-200" : "text-gray-700"}`}>
-              {card.providername}
-            </span>
+            <span className="text-sm text-gray-300">{card.providername}</span>
           </div>
         </div>
+
         <Link to={`/addservice/${card._id}`}>
-          <button className="w-full bg-primary text-white py-2 px-4 rounded-lg hover:bg-primary-dark transition-colors duration-200 font-medium">
+          <button className="w-full mt-5 bg-primary text-white py-2 rounded-xl font-semibold hover:bg-primary-dark transition">
             View Details
           </button>
         </Link>
@@ -45,6 +46,7 @@ const ServiceCard = ({ card, day }) => {
     </div>
   );
 };
+
 
 const AllService = () => {
   const { day } = useContext(AuthContext);

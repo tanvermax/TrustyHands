@@ -1,255 +1,141 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import "./addservic.css";
 import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 
 const SignleServices = () => {
   const { User, day } = useContext(AuthContext);
-
   const loadData = useLoaderData();
-  // console.log(loadData);
 
-  const handleservice = (e) => {
+  const handleService = async (e) => {
     e.preventDefault();
     const form = e.target;
-    const orderid = form.orderid.value;
-    const servicename = form.servicename.value;
-    const instruction = form.instruction.value;
-    const serviceprovider = form.serviceprovider.value;
-    const serviceprovideremail = form.serviceprovideremail.value;
 
-    const cost = form.cost.value;
-    const serviceStatus = form.serviceStatus.value;
-    const ordergivenusername = User.displayName;
-    const ordergivenuseremail = User.email;
-    const serviceDate = form.serviceDate.value;
-    const servicedetails = {
-      ordergivenuseremail,
-      serviceprovideremail,
-      serviceStatus,
-      serviceDate,
-      cost,
-      ordergivenusername,
-      orderid,
-      serviceDate,
-      servicename,
-      instruction,
-      serviceprovider,
+    const orderDetails = {
+      orderid: form.orderid.value,
+      servicename: form.servicename.value,
+      instruction: form.instruction.value,
+      serviceprovider: form.serviceprovider.value,
+      serviceprovideremail: form.serviceprovideremail.value,
+      cost: form.cost.value,
+      serviceStatus: "Pending",
+      ordergivenusername: User.displayName,
+      ordergivenuseremail: User.email,
+      serviceDate: form.serviceDate.value,
     };
 
-    // console.log(servicedetails);
-    document.getElementById("my_modal_5").close();
-    fetch("http://localhost:5000/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(servicedetails),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("inside data", data);
-        if (data.insertedId) {
-          alert("data created");
-        }
+    try {
+      const res = await fetch("http://localhost:5000/order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderDetails),
       });
+      const data = await res.json();
+      if (data.insertedId) {
+        alert("Service booked successfully!");
+        document.getElementById("my_modal_5").close();
+      }
+    } catch (err) {
+      console.error("Booking error:", err);
+    }
   };
 
   return (
-    <div className="w-8/12 mx-auto py-10">
-      <div key={loadData._id} className="loadData border shadow-xl">
-        <figure>
-          <img className="h-96 w-full" src={loadData.imageUrl} alt="Shoes" />
-        </figure>
-        <div className="loadData-body">
-          <div className="flex justify-between items-center">
-            <div className="py-5 px-3">
-              <h2
-                className={`loadData-title md:text-3xl text-[8px] font-semibold ${
-                  day ? "text-white" : "text-black"
-                }`}
-              >
-                {loadData.serviceName}
-              </h2>
-              <p
-                className={`h-24 text-gray-600 overflow-hidden py-3 text-[8px] md:text-xl ${
-                  day ? "text-white" : "text-black"
-                } `}
-              >
-                {loadData.description} in serviceArea :{" "}
-                <span className="badge badge-secondary text-[8px] md:text-xl font-semibold">
-                  {loadData.serviceArea}
-                </span>{" "}
-              </p>
-            </div>
-            <div>
-              <p className={`text-xl  px-3 font-semibold ${day ? "text-white": "text-black"}`}>{loadData.price}$</p>
-            </div>
+    <div className="w-full max-w-4xl mx-auto py-10 px-4">
+      <div className={`rounded-lg overflow-hidden shadow-md ${day ? "bg-gray-800 text-white" : "bg-white text-black"}`}>
+        <img src={loadData.imageUrl} alt="Service" className="w-full h-72 object-cover" />
+
+        <div className="p-6">
+          <div className="flex justify-between items-center mb-4">
+            <h2 className="text-xl md:text-3xl font-bold">{loadData.serviceName}</h2>
+            <span className="text-lg font-semibold">{loadData.price}$</span>
           </div>
-          <div className=" flex justify-between p-5">
-            <div
-              className={`badge p-5 badge-outline ${
-                day ? "text-white" : "text-black"
-              }`}
-            >
-              {loadData.providername}
-            </div>
-            <div className=" border-warning rounded-full border-2">
-              <img
-                className="h-14 w-14 rounded-full"
-                src={loadData.providerphoto}
-                alt=""
-              />
-            </div>
+
+          <p className="text-sm md:text-base mb-2">
+            {loadData.description}
+          </p>
+          <p className="text-sm text-gray-500">
+            Service Area: <strong>{loadData.serviceArea}</strong>
+          </p>
+
+          <div className="flex items-center justify-between mt-6">
+            <div className="text-sm font-medium">{loadData.providername}</div>
+            <img src={loadData.providerphoto} alt="Provider" className="h-12 w-12 rounded-full border-2" />
           </div>
         </div>
       </div>
 
-      <div className="py-5">
+      {/* Book Now Button */}
+      <div className="text-center mt-6">
         <button
-          className={`font-semibold ${day ? "nav_link2" : "nav_link"}`}
+          className={`py-2 px-5 rounded font-semibold ${day ? "bg-blue-500 text-white" : "bg-blue-700 text-white"}`}
           onClick={() => document.getElementById("my_modal_5").showModal()}
         >
-          <span className="relative z-10 px-2">Book Now</span>
+          Book Now
         </button>
       </div>
+
+      {/* Booking Modal */}
       <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box">
-          <h3 className="font-bold text-lg">Hello!</h3>
+        <div className="modal-box bg-white text-black">
+          <h3 className="font-bold text-lg mb-4">Complete Your Booking</h3>
+          <form onSubmit={handleService} className="space-y-4">
+            {[
+              { label: "Service ID", name: "orderid", value: loadData._id },
+              { label: "Service Name", name: "servicename", value: loadData.serviceName },
+              { label: "Provider Name", name: "serviceprovider", value: loadData.providername },
+              { label: "Provider Email", name: "serviceprovideremail", value: loadData.provideremail },
+              { label: "User Name", value: User.displayName },
+              { label: "User Email", value: User.email },
+              { label: "Cost ($)", name: "cost", value: loadData.price },
+            ].map(({ label, name, value }) => (
+              <div key={name || label}>
+                <label className="block text-sm font-medium mb-1">{label}</label>
+                <input
+                  type="text"
+                  name={name}
+                  defaultValue={value}
+                  readOnly
+                  className="w-full px-3 py-2 border rounded-md"
+                />
+              </div>
+            ))}
 
-          <div className="">
-            <form onSubmit={handleservice}>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">ServiceId</span>
-                </label>
-                <input
-                  type="text"
-                  className="input amarform"
-                  name="orderid"
-                  defaultValue={loadData._id}
-                  readOnly
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Service Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="servicename"
-                  className="input amarform  "
-                  defaultValue={loadData.serviceName}
-                  readOnly
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Service Date</label>
               <input
-                type="hidden"
-                name="serviceStatus"
-                value="Pending" // Default value
+                type="date"
+                name="serviceDate"
+                required
+                className="w-full px-3 py-2 border rounded-md"
               />
+            </div>
 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Provider Name</span>
-                </label>
-                <input
-                  type="text"
-                  name="serviceprovider"
-                  className="input amarform"
-                  defaultValue={loadData.providername}
-                  readOnly
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Special Instructions</label>
+              <textarea
+                name="instruction"
+                defaultValue="Address, area, customized service plan"
+                rows="3"
+                className="w-full px-3 py-2 border rounded-md"
+              ></textarea>
+            </div>
 
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Provider email</span>
-                </label>
-                <input
-                  type="text"
-                  name="serviceprovideremail"
-                  className="input amarform"
-                  defaultValue={loadData.provideremail}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">User Name</span>
-                </label>
-                <input
-                  type="text"
-                  className="input amarform"
-                  defaultValue={User.displayName}
-                  readOnly
-                />
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">User email</span>
-                </label>
-                <input
-                  type="text"
-                  className="input amarform"
-                  defaultValue={User.email}
-                  readOnly
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Service Taking Date</span>
-                </label>
-                <input
-                  type="date"
-                  name="serviceDate"
-                  className="input amarform"
-                />
-              </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Special instruction</span>
-                </label>
-                <textarea
-                  className="border-[1px]"
-                  name="instruction"
-                  defaultValue=" address , area, customized service plan"
-                  id=""
-                ></textarea>
-              </div>
-
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Service Cost $</span>
-                </label>
-                <input
-                  type="text"
-                  name="cost"
-                  className="input amarform"
-                  defaultValue={loadData.price}
-                  readOnly
-                />
-              </div>
-              {/* if there is a button in form, it will close the modal */}
-              <div className="flex justify-between gap-5 py-5">
-                <button
-                  type="button" // Prevents form submission
-                  className="nav_link font-semibold"
-                  onClick={() => document.getElementById("my_modal_5").close()}
-                >
-                  <span className="relative z-10">Close</span>
-                </button>
-                <button
-                  type="submit" // Ensures this button submits the form
-                  className="nav_link font-semibold"
-                >
-                  <span className="relative z-10">Purchase</span>
-                </button>
-              </div>
-            </form>
-          </div>
+            <div className="flex justify-end gap-3 pt-4">
+              <button
+                type="button"
+                onClick={() => document.getElementById("my_modal_5").close()}
+                className="px-4 py-2 bg-gray-300 text-black rounded"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                Confirm Booking
+              </button>
+            </div>
+          </form>
         </div>
       </dialog>
     </div>
