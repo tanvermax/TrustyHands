@@ -1,69 +1,63 @@
 import React, { useContext } from "react";
-import photo from "./../../assets/logo2.png";
-import Imageslide from "./Swiper/Imageslide";
 import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 
 const Aboutus = () => {
   const { day } = useContext(AuthContext);
-  return (
-    <>
-      <div className="grid lg:grid-cols-2 w-11/12 mx-auto lg:py-20">
-        <div className="content-center">
-          <p className={`text-5xl ${day ? "text-white" : "text-black"} `}>TrustyHands</p>
 
-        </div>
+  return (
+    <div className="w-11/12 mx-auto space-y-20 py-10 lg:py-20">
+      {/* Company Intro */}
+      <section className="grid lg:grid-cols-2 gap-10 items-center">
         <div>
-          <h1 className="text-3xl font-bold py-5">Know About Us</h1>
-          <p className="lg:text-xl text-xs">
-            TrustyHands is a virtual marketplace for service providers offering
-            one-stop solutions for various services you require at households
-            and offices every now and then. TrustyHands offers you an array of
-            essential day-to-day services to avail from experienced technicians,
-            skilled workers, and craftspeople. Also, you will find dynamic
-            independent freelancers and consultants offering their professional
-            services to meet your work demand. TrustyHands We are offering you a
-            hassle-free journey to find the right professionals for the job. You
-            can easily choose from a pool of professionals in your area, skip
-            the bargaining stress by having either pre-agreed rates, and use
-            secured payment and transaction tracking. Trade License Number:
-            TRAD/DNCC/062213/2022
+          <h1 className={`text-5xl font-bold mb-4 ${day ? "text-white" : "text-gray-900"}`}>
+            TrustyHands
+          </h1>
+          <p className="lg:text-lg text-sm leading-relaxed text-gray-600 dark:text-gray-300">
+            TrustyHands is your all-in-one virtual marketplace for household and office services.
+            From skilled technicians to independent freelancers, we connect you with trusted professionals
+            for your everyday needs. Enjoy transparent pricing, secure payments, and hassle-free bookings.
           </p>
-          <ul className=" list-disc py-3 ml-10 space-y-2">
-            <li className="hover:text-orange-400">
-              Complete Sanitization and cleaning of bathroom
-            </li>
-            <li className="hover:text-orange-400">
-              It's a long established way
-            </li>
-            <li className="hover:text-orange-400">
-              Biodegradable chemicals are used
-            </li>
+          <ul className="list-disc pl-6 mt-4 space-y-2 text-gray-700 dark:text-gray-300">
+            <li>Bathroom sanitization and deep cleaning</li>
+            <li>Pre-agreed, no-bargain pricing</li>
+            <li>Eco-friendly, biodegradable chemicals used</li>
           </ul>
-        </div>
-      </div>
-      <section className="grid lg:grid-cols-2 gap-10 w-11/12 mx-auto lg:py-20">
-        <div className="py-10">
-          <h1 className="text-3xl font-bold py-5">Start As Service provider</h1>
-          <ul className="py-7">
-            <li>
-              It is a long established fact that a reader will be distracted by
-              the readable.
-            </li>
-          </ul>
-          <button className="btn bg-yellow-300 ">Become Service Provider</button>
+          <p className="mt-4 text-sm text-gray-400">
+            Trade License: <span className="text-gray-600">TRAD/DNCC/062213/2022</span>
+          </p>
         </div>
         <div>
           <img
-            className="md:w-full rounded-2xl"
-            src="https://www.poshorabd.com/assets/uploads/media-uploader/4905418c115548a996d36deac6d5fd5b1704883862.jpg"
-            alt=""
+            src="https://images.unsplash.com/photo-1615856210162-9ae33390b1a2?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8aG9tZSUyMHNlcnZpY2V8ZW58MHx8MHx8fDA%3D"
+            alt="TrustyHands Service"
+            className="w-full rounded-2xl shadow-lg"
           />
         </div>
       </section>
-      {/* <section>
-        <Imageslide></Imageslide>
-      </section> */}
-    </>
+
+      {/* Become Provider */}
+      <section className="grid lg:grid-cols-2 gap-10 items-center bg-yellow-100 dark:bg-yellow-200/20 rounded-xl p-10">
+        <div>
+          <h2 className="text-3xl font-semibold text-gray-900 dark:text-white mb-4">
+            Start as a Service Provider
+          </h2>
+          <p className="text-gray-700 dark:text-gray-300 mb-6">
+            Join our growing network of professionals and offer your services to thousands of users across the region.
+            Set your schedule, control your rates, and grow your career through TrustyHands.
+          </p>
+          <button className="bg-yellow-400 hover:bg-yellow-300 text-black px-6 py-2 rounded-md font-semibold transition">
+            Become a Service Provider
+          </button>
+        </div>
+        <div>
+          <img
+            src="https://images.unsplash.com/photo-1686178827149-6d55c72d81df?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTF8fGhvbWUlMjBzZXJ2aWNlfGVufDB8fDB8fHww"
+            alt="Become a Service Provider"
+            className="w-full rounded-xl shadow-lg"
+          />
+        </div>
+      </section>
+    </div>
   );
 };
 

@@ -1,34 +1,43 @@
 import React from "react";
 
+const faqs = [
+  {
+    question: "What is TrustyHands?",
+    answer:
+      "TrustyHands is your one-stop platform for personal and professional services. From electricians, cleaners, plumbers to drivers and freelancers — find, book, and hire trusted service providers easily through our website or app.",
+  },
+  {
+    question: "How does TrustyHands work?",
+    answer:
+      "Simply enter your location and desired service on our website or app. We connect you with nearby providers, allowing you to choose based on ratings and fixed charges. You can book and schedule services, and our team monitors the job till completion.",
+  },
+  {
+    question: "What are your services?",
+    answer:
+      "We offer over 100 services, including drivers, electricians, plumbers, photographers, writers, and more. Visit our website for the complete list.",
+  },
+];
+
 const Faq = () => {
   return (
-    <div className="w-8/12 mx-auto mt-10">
-      <div className="collapse collapse-plus bg-base-200 my-2">
-        <input type="radio" name="my-accordion-3" defaultChecked />
-        <div className="collapse-title text-xl font-medium bg-orange-300">
-        What is TrustyHands?
-        </div>
-        <div className="collapse-content">
-          <p>TrustyHands is your one-stop solution platform for all day-to-day personal and professional service needs, all gathered in one daali (platform). From electricians, cleaners, and plumbers to drivers and skilled freelancers - you can find, book, and hire the right person to do the job you need done at home or work, through our website and app.</p>
-        </div>
-      </div>
-      <div className="collapse collapse-plus bg-base-200 my-2">
-        <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title text-xl font-medium bg-orange-300">
-        How does TrustyHands work?
-        </div>
-        <div className="collapse-content">
-          <p>Easy! Use our app/ website to find the person you need to get the job done! You put in your location and desired service, and we connect you to the relevant service providers closest to you. Choose the SP you want, based on their ratings and pre-set service charges, and we will help you book and schedule the job, and ensure the SP arrives at the right location, following health and safety protocols. Our Customer Service agents are there to remotely monitor job status till completion, and support you during any time.</p>
-        </div>
-      </div>
-      <div className="collapse collapse-plus bg-base-200 my-2">
-        <input type="radio" name="my-accordion-3" />
-        <div className="collapse-title text-xl font-medium bg-orange-300">
-        What are your services?
-        </div>
-        <div className="collapse-content">
-          <p>We have service providers skilled in over 100 services - Driver? Electrician? Plumber? Photographer? Content Writer? Find them all and more here! Please find a full list of our services form our website.</p>
-        </div>
+    <div className="max-w-3xl mx-auto mt-12 px-4">
+      <h2 className="text-3xl font-semibold text-center mb-8">Frequently Asked Questions</h2>
+      <div className="space-y-4">
+        {faqs.map((faq, index) => (
+          <div
+            key={index}
+            className="border border-gray-200 rounded-lg shadow-sm overflow-hidden"
+          >
+            <details className="group">
+              <summary className="cursor-pointer bg-orange-100 px-5 py-4 text-lg font-medium group-open:bg-orange-200 transition">
+                {faq.question}
+              </summary>
+              <div className="px-5 py-4 text-gray-700 bg-white">
+                {faq.answer}
+              </div>
+            </details>
+          </div>
+        ))}
       </div>
     </div>
   );
