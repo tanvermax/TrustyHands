@@ -50,7 +50,7 @@ const AuthPovider = ({ children }) => {
       // console.log("state capture", currentUser);
       if (currentUser?.email) {
         const user =  {email : currentUser.email}
-        axios.post('https://serverside-bay.vercel.app/jwt', user,{
+        axios.post('http://localhost:5000/jwt', user,{
           withCredentials:true
         })
         .then(res=>
@@ -58,7 +58,7 @@ const AuthPovider = ({ children }) => {
         )
       }
       else{
-        axios.post('https://serverside-bay.vercel.app/logout',{},{
+        axios.post('http://localhost:5000/logout',{},{
           withCredentials:true
         })
         .then(res=> console.log("logou", res.data)

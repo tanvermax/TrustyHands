@@ -16,7 +16,7 @@ const Section3 = () => {
                         />
                     </div>
                     <p className="text-black font-medium text-[8px] md:text-base">
-                        Get a Better FixitNest Experience on Mobile. Download the FixitNest app now!
+                        Get a Better TrustyHands Experience on Mobile. Download the TrustyHands app now!
                     </p>
                 </div>
 

@@ -34,7 +34,7 @@ const Imageslide = () => {
               </svg>
               <blockquote>
                 <p className="text-2xl font-medium ">
-                  "Fixitnest service was professional. It contains tons of predesigned
+                  "TrustyHands service was professional. It contains tons of predesigned
                   components and instrument for gardening. Perfect choice for your Home gardening service.""
                 </p>
               </blockquote>
@@ -75,7 +75,7 @@ const Imageslide = () => {
               </svg>
               <blockquote>
                 <p className="text-2xl font-medium ">
-                  "Fixitnest service is just awesome. It contains tons of predesigned
+                  "TrustyHands service is just awesome. It contains tons of predesigned
                   components and instrument for cleaning home. Perfect choice for your Home cleaning service."
                 </p>
               </blockquote>
@@ -116,7 +116,7 @@ const Imageslide = () => {
               </svg>
               <blockquote>
                 <p className="text-2xl font-medium ">
-                  "Fixitnest service was satisfied. It contains tons of predesigned
+                  "TrustyHands service was satisfied. It contains tons of predesigned
                   components and instrument for body massage. Perfect choice for your Home body massage service."
                 </p>
               </blockquote>

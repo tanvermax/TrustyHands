@@ -15,7 +15,7 @@ const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo */}
           <div className="flex items-center">
-            <a href="/" aria-label="FixitNest Home">
+            <a href="/" aria-label="TrustyHands Home">
               <p className={`text-5xl ${day ? "text-white" : "text-black"} `}>TrustyHands</p>
 
             </a>
@@ -102,7 +102,7 @@ const Footer = () => {
         {/* Footer Bottom */}
         <div className="mt-10 border-t border-gray-600 pt-6 text-center">
           <p className={`text-xs md:text-sm font-medium ${textColor}`}>
-            &copy; {new Date().getFullYear()} FixitNest. All rights reserved.
+            &copy; {new Date().getFullYear()} TrustyHands. All rights reserved.
           </p>
         </div>
       </div>
