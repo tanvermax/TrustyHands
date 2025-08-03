@@ -33,7 +33,7 @@ const Editservice = () => {
       };
     // console.log(newService);
     
-    fetch(`http://localhost:5000/addservice2/${loadData._id}`,{
+    fetch(`https://trusty-hands-backend.vercel.app/addservice2/${loadData._id}`,{
         method : "PUT",
         headers: {
             "Content-Type": "application/json",

@@ -27,9 +27,9 @@ const Addservices = () => {
       providerphoto: User.photoURL,
       providername: User.displayName,
     };
-    http://localhost:5000/addservice
+    https://trusty-hands-backend.vercel.app/addservice
     try {
-      const res = axios.post("http://localhost:5000/addservice",newService)
+      const res = axios.post("https://trusty-hands-backend.vercel.app/addservice",newService)
       console.log(res.data)
       toast.success("service data Added")
 

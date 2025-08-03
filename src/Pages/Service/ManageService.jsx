@@ -11,7 +11,7 @@ const ManageService = () => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/addservice23?email=${User.email}`, {
+      .get(`https://trusty-hands-backend.vercel.app/addservice23?email=${User.email}`, {
         withCredentials: "include",
       })
       .then((res) => setData(res.data));
@@ -28,7 +28,7 @@ const ManageService = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/addservice/${_id}`, {
+        fetch(`https://trusty-hands-backend.vercel.app/addservice/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
