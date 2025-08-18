@@ -5,10 +5,11 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Aos from "aos";
 import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const { googlelogin, loginwihtpass,day } = useContext(AuthContext);
- 
+  const { googlelogin, loginwihtpass, day } = useContext(AuthContext);
+
 
   useEffect(() => {
     Aos.init({
@@ -27,6 +28,8 @@ const Login = () => {
     loginwihtpass(email, password)
       .then((result) => {
         console.log(result.user);
+        toast.success("Account login successfully 🎉");
+
         navigate("/");
       })
       .catch((error) => {
@@ -40,7 +43,7 @@ const Login = () => {
         <title>Log in</title>
       </Helmet>
       <div className="hero  min-h-screen flex items-center justify-center">
-        <div className={`container mx-auto px-4 lg:px-8 ${day ? "text-white": "text-black"}`}>
+        <div className={`container mx-auto px-4 lg:px-8 ${day ? "text-white" : "text-black"}`}>
           <div className="flex flex-col-reverse lg:flex-row items-center gap-8">
             <div data-aos="fade-up" className="text-center lg:text-left lg:w-1/2">
               <h1 className="text-4xl lg:text-5xl font-bold mb-4">Login now!</h1>

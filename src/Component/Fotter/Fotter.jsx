@@ -10,7 +10,7 @@ const Footer = () => {
   const headingColor = day ? "text-white" : "text-black";
 
   return (
-    <footer className={`pt-16 pb-8 px-6 md:px-10 bg-${day ? "black" : "white"} transition-colors duration-500`}>
+    <footer className={` pb-8 px-6 md:px-10 bg-${day ? "black" : "white"} transition-colors duration-500`}>
       <div className="max-w-screen-xl mx-auto">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Logo */}

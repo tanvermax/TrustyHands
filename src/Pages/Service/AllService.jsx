@@ -47,12 +47,39 @@ export const ServiceCard = ({ card, day }) => {
   );
 };
 
+const categories = [
+  "Cleaning Services",
+  "Appliance & Electronics Services",
+  "Plumbing Services",
+  "Electrical Services",
+  "Painting & Renovation",
+  "Carpentry Services",
+  "Home Shifting & Moving",
+  "Beauty & Personal Care",
+  "Health & Wellness",
+  "Pest & Sanitation Services",
+  "Gardening & Outdoor",
+  "Security & Smart Home",
+];
 
 const AllService = () => {
   const { day } = useContext(AuthContext);
   const data = useLoaderData();
   const [loadeDAta, setData] = useState(data);
   const [search, setSearch] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  // Filtered services
+  const filteredServices = [...loadeDAta]
+    .sort((a, b) => a.price - b.price)
+    .filter((card) =>
+      search === ""
+        ? true
+        : card.serviceName.toLowerCase().includes(search.toLowerCase())
+    )
+    .filter((card) =>
+      selectedCategory === "All" ? true : card.category === selectedCategory
+    );
 
   return (
     <div className="w-11/12 mx-auto max-w-7xl py-8">
@@ -60,10 +87,12 @@ const AllService = () => {
         <title>All Services - Service Sharing</title>
       </Helmet>
 
+      {/* Title + Search */}
       <div className="flex flex-col lg:flex-row items-center justify-between mb-8">
         <h1
-          className={`text-2xl lg:text-3xl font-bold ${day ? "text-white" : "text-gray-900"
-            } mb-4 lg:mb-0`}
+          className={`text-2xl lg:text-3xl font-bold ${
+            day ? "text-white" : "text-gray-900"
+          } mb-4 lg:mb-0`}
         >
           All Services
         </h1>
@@ -73,26 +102,55 @@ const AllService = () => {
           <input
             placeholder="Search services..."
             onChange={(e) => setSearch(e.target.value)}
-            className={`w-full lg:w-80 pl-10 pr-12 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${day ? "bg-gray-700 text-white border-gray-600" : "bg-white text-gray-900 border-gray-300"
-              }`}
+            className={`w-full lg:w-80 pl-10 pr-12 py-2 border rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent ${
+              day
+                ? "bg-gray-700 text-white border-gray-600"
+                : "bg-white text-gray-900 border-gray-300"
+            }`}
             type="search"
           />
           <BsMic className="absolute right-3 text-blue-500" />
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {[...loadeDAta]
-          .sort((a, b) => a.price - b.price)
-          .filter((card) =>
-            search === ""
-              ? true
-              : card.serviceName.toLowerCase().includes(search.toLowerCase())
-          )
-          .map((card) => (
-            <ServiceCard key={card._id} card={card} day={day} />
-          ))}
+      {/* ✅ Category Buttons */}
+      <div className="flex flex-wrap gap-3 mb-6">
+        <button
+          onClick={() => setSelectedCategory("All")}
+          className={`px-4 py-2 rounded-lg font-medium transition ${
+            selectedCategory === "All"
+              ? "bg-primary text-white"
+              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+          }`}
+        >
+          All
+        </button>
+        {categories.map((cat, idx) => (
+          <button
+            key={idx}
+            onClick={() => setSelectedCategory(cat)}
+            className={`px-4 py-2 rounded-lg font-medium transition ${
+              selectedCategory === cat
+                ? "bg-primary text-white"
+                : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+            }`}
+          >
+            {cat}
+          </button>
+        ))}
       </div>
+
+      {/* Services Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredServices.map((card) => (
+          <ServiceCard key={card._id} card={card} day={day} />
+        ))}
+      </div>
+
+      {/* If no service */}
+      {filteredServices.length === 0 && (
+        <p className="text-center text-gray-500 mt-10">No services found.</p>
+      )}
     </div>
   );
 };

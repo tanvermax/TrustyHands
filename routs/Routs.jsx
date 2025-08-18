@@ -7,7 +7,6 @@ import Home from "../src/Pages/Home/Home";
 import Aboutus from "../src/Pages/Home/Aboutus";
 import AllService from "../src/Pages/Service/AllService";
 import ServiceLayout from "../src/Pages/Service/ServiceLayout";
-import Addservices from "../src/Pages/Service/Addservices";
 import ManageService from "../src/Pages/Service/ManageService";
 import Bookedservice from "../src/Pages/Service/Bookedservice";
 import PrivetRouts from "../src/Privetrouts/PrivetRouts";
@@ -15,6 +14,13 @@ import SignleServices from "../src/Pages/Service/SignleServices";
 import Editservice from "../src/Pages/Service/Editservice";
 import Errorpage from "../src/Pages/Errorpage";
 import Faq from "../src/Pages/Home/Faq/Faq";
+import DashboardLayout from "../src/Dashbord/DashboardLayout";
+import ServiceOverview from "../src/Dashbord/ServiceProvider/Overview";
+import Addservices from "../src/Dashbord/ServiceProvider/Addservices";
+import MyServices from "../src/Dashbord/ServiceProvider/MyService";
+import ServiceProviderProfile from "../src/Dashbord/ServiceProvider/ProfileSetting";
+import Settings from "../src/Dashbord/ServiceProvider/Setting";
+import ContactUs from "../src/Pages/Home/Contactus";
 
 const Routs = createBrowserRouter([
   {
@@ -36,6 +42,39 @@ const Routs = createBrowserRouter([
         path: "aboutus",
         element: <Aboutus></Aboutus>,
         errorElement: <Errorpage></Errorpage>,
+      },
+      {
+        path: "contactus",
+        element: <ContactUs/>,
+        errorElement: <Errorpage></Errorpage>,
+      },
+      {
+        path: "dashboard",
+        element: <DashboardLayout />,
+        errorElement: <Errorpage></Errorpage>,
+        children: [
+          {
+            path: "",
+            element: <ServiceOverview />
+          },
+          {
+            path:"addservice",
+            element:<Addservices/>
+          }
+          ,
+          {
+            path:"myservices",
+            element:<MyServices/>
+          },
+          {
+            path:"profilesetting",
+            element:<ServiceProviderProfile/>
+          },
+           {
+            path:"settings",
+            element:<Settings/>
+          },
+        ]
       },
       {
         path: "register",
@@ -63,16 +102,7 @@ const Routs = createBrowserRouter([
         ),
         errorElement: <Errorpage></Errorpage>,
       },
-      {
-        path: "addService",
-        element: (
-          <PrivetRouts>
-            <Addservices></Addservices>
-          </PrivetRouts>
-        ),
 
-        errorElement: <Errorpage></Errorpage>,
-      },
       {
         path: "manageservices",
         errorElement: <h1>route not found</h1>,

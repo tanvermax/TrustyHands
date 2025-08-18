@@ -11,6 +11,7 @@ import {
 } from "firebase/auth";
 import axios from "axios";
 import AuthContext from "./AuhtContext";
+import { toast } from "react-toastify";
 const gooogleprovider = new GoogleAuthProvider();
 
 const AuthPovider = ({ children }) => {
@@ -18,12 +19,12 @@ const AuthPovider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
 
-  const [day,setDay]= useState(()=>{
+  const [day, setDay] = useState(() => {
     const savedDay = localStorage.getItem("day");
-    return savedDay ? JSON.parse(savedDay) :false ;
+    return savedDay ? JSON.parse(savedDay) : false;
   });
 
- 
+
 
   const registerwihtgmail = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
@@ -49,20 +50,20 @@ const AuthPovider = ({ children }) => {
       setUser(currentUser);
       // console.log("state capture", currentUser);
       if (currentUser?.email) {
-        const user =  {email : currentUser.email}
-        axios.post('https://trusty-hands-backend.vercel.app/jwt', user,{
-          withCredentials:true
+        const user = { email: currentUser.email }
+        axios.post('https://trusty-hands-backend.vercel.app/jwt', user, {
+          withCredentials: true
         })
-        .then(res=>
-          console.log(res.data)
-        )
+          .then(res =>
+            console.log(res.data)
+          )
       }
-      else{
-        axios.post('https://trusty-hands-backend.vercel.app/logout',{},{
-          withCredentials:true
+      else {
+        axios.post('https://trusty-hands-backend.vercel.app/logout', {}, {
+          withCredentials: true
         })
-        .then(res=> console.log("logou", res.data)
-        )
+          .then(res => console.log("logou", res.data)
+          )
       }
       setLoading(false);
     });
@@ -73,27 +74,29 @@ const AuthPovider = ({ children }) => {
 
   const logout = () => {
     setLoading(true);
+    toast.warn("Account logout successfully 🎉");
+
     return signOut(auth);
   };
 
-  
-  const togglebutton=()=>{
-   setDay( prev=>{
-    const newday = !prev;
-    localStorage.setItem("day", JSON.stringify(newday));
-    return newday;
-   })
+
+  const togglebutton = () => {
+    setDay(prev => {
+      const newday = !prev;
+      localStorage.setItem("day", JSON.stringify(newday));
+      return newday;
+    })
   }
 
   const auhtinfo = {
     registerwihtgmail,
     googlelogin,
-    User,togglebutton,
+    User, togglebutton,
     logout,
     setLoading,
     setUser,
     loginwihtpass,
-    loading,day,
+    loading, day,
     updateUser,
   };
 
