@@ -105,7 +105,7 @@ const Routs = createBrowserRouter([
 
       {
         path: "manageservices",
-        errorElement: <h1>route not found</h1>,
+       
         element: (
           <PrivetRouts>
             <ManageService></ManageService>
