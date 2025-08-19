@@ -16,7 +16,7 @@ const SocialLogin = () => {
       const user = result.user;
 
       // Save user in backend with default role "user"
-      await axios.post("http://localhost:5000/user", {
+      await axios.post("https://trusty-hands-backend.vercel.app/user", {
         name: user.displayName || "No Name",
         email: user.email,
         photoURL: user.photoURL,

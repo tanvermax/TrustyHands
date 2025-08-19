@@ -3,7 +3,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import useUserData from "../Hook/useUserData";
 import { 
   FaHome, FaUser, FaPlusCircle, FaServicestack, FaStar, 
-  FaUsers, FaCog, FaHeadset, FaFileContract, FaShoppingCart 
+  FaUsers, FaCog, FaHeadset, FaFileContract, FaShoppingCart, 
+  FaUsersCog, FaChartLine, FaDatabase, FaEnvelope, FaFileAlt 
 } from "react-icons/fa";
 
 const DashboardLayout = () => {
@@ -13,7 +14,7 @@ const DashboardLayout = () => {
     return <div className="p-6">Loading profile...</div>;
   }
 
-  // Define sidebar links based on role
+  // Sidebar links
   const serviceProviderLinks = [
     { name: "Overview", to: "/dashboard", icon: <FaHome /> },
     { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
@@ -35,7 +36,27 @@ const DashboardLayout = () => {
     { name: "Terms and Conditions", to: "/dashboard/terms", icon: <FaFileContract /> },
   ];
 
-  const linksToRender = profile.role === "serviceProvider" ? serviceProviderLinks : userLinks;
+  const superAdminLinks = [
+    { name: "Overview", to: "/dashboard", icon: <FaHome /> },
+    { name: "Manage Users", to: "/dashboard/manage-users", icon: <FaUsersCog /> },
+    { name: "Manage Service Providers", to: "/dashboard/manage-service-providers", icon: <FaUsers /> },
+    { name: "All Services", to: "/dashboard/all-services", icon: <FaServicestack /> },
+    { name: "Orders", to: "/dashboard/orders", icon: <FaShoppingCart /> },
+    { name: "Reports", to: "/dashboard/reports", icon: <FaFileAlt /> },
+    { name: "Mail / Messages", to: "/dashboard/messages", icon: <FaEnvelope /> },
+    { name: "Analytics", to: "/dashboard/analytics", icon: <FaChartLine /> },
+    { name: "Database", to: "/dashboard/database", icon: <FaDatabase /> },
+    { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
+    { name: "Support 24/7", to: "/dashboard/support", icon: <FaHeadset /> },
+    { name: "Terms and Conditions", to: "/dashboard/terms", icon: <FaFileContract /> },
+  ];
+
+  const linksToRender =
+    profile.role === "serviceProvider"
+      ? serviceProviderLinks
+      : profile.role === "superadmin"
+      ? superAdminLinks
+      : userLinks;
 
   return (
     <div className="flex h-screen bg-gray-100">

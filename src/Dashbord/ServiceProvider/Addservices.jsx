@@ -46,7 +46,7 @@ const Addservices = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/addservice", newService);
+      await axios.post("https://trusty-hands-backend.vercel.app/addservice", newService);
       toast.success("Service Added Successfully!");
       form.reset();
       setDescription("");

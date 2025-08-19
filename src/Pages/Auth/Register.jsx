@@ -35,7 +35,7 @@ const Register = () => {
       .then((result) => {
         setUser(result.user);
         updateUser({ displayName: name, photoURL: photoURL });
-        fetch("http://localhost:5000/user", {
+        fetch("https://trusty-hands-backend.vercel.app/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

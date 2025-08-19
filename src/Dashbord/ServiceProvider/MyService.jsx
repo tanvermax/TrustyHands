@@ -10,7 +10,7 @@ const MyServices = () => {
   useEffect(() => {
     if (User?.email) {
       axios
-        .get(`http://localhost:5000/addservice?email=${User.email}`)
+        .get(`https://trusty-hands-backend.vercel.app/addservice?email=${User.email}`)
         .then((response) => setData(response.data))
         .catch((err) => console.error(err));
     }
