@@ -16,7 +16,7 @@ const DashboardLayout = () => {
 
   // Sidebar links
   const serviceProviderLinks = [
-    { name: "Overview", to: "/dashboard", icon: <FaHome /> },
+    { name: "Home", to: "/dashboard/serviceproviderhome", icon: <FaHome /> },
     { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
     { name: "Add Service", to: "/dashboard/addservice", icon: <FaPlusCircle /> },
     { name: "My Services", to: "/dashboard/myservices", icon: <FaServicestack /> },
@@ -28,6 +28,7 @@ const DashboardLayout = () => {
   ];
 
   const userLinks = [
+    { name: "Home", to: "/dashboard/userHome", icon: <FaHome /> },
     { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
     { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
     { name: "My Orders", to: "/dashboard/myorders", icon: <FaShoppingCart /> },
@@ -37,7 +38,7 @@ const DashboardLayout = () => {
   ];
 
   const superAdminLinks = [
-    { name: "Overview", to: "/dashboard", icon: <FaHome /> },
+    { name: "Home", to: "/dashboard/superadminhome", icon: <FaHome /> },
     { name: "Manage Users", to: "/dashboard/manage-users", icon: <FaUsersCog /> },
     { name: "Manage Service Providers", to: "/dashboard/manage-service-providers", icon: <FaUsers /> },
     { name: "All Services", to: "/dashboard/all-services", icon: <FaServicestack /> },

@@ -21,6 +21,8 @@ import MyServices from "../src/Dashbord/ServiceProvider/MyService";
 import ServiceProviderProfile from "../src/Dashbord/ServiceProvider/ProfileSetting";
 import Settings from "../src/Dashbord/ServiceProvider/Setting";
 import ContactUs from "../src/Pages/Home/Contactus";
+import SuperAdminHome from "../src/Dashbord/SuperAdmin/Home";
+import UserHome from "../src/Dashbord/UserDasbord/serHome";
 
 const Routs = createBrowserRouter([
   {
@@ -45,35 +47,42 @@ const Routs = createBrowserRouter([
       },
       {
         path: "contactus",
-        element: <ContactUs/>,
+        element: <ContactUs />,
         errorElement: <Errorpage></Errorpage>,
       },
       {
         path: "dashboard",
-        element: <DashboardLayout />,
+        element: <PrivetRouts><DashboardLayout /></PrivetRouts>,
         errorElement: <Errorpage></Errorpage>,
-        children: [
-          {
-            path: "",
-            element: <ServiceOverview />
-          },
-          {
-            path:"addservice",
-            element:<Addservices/>
-          }
+        children: [{
+          path: "superadminhome",
+          element: <SuperAdminHome />
+        },
+        {
+          path: "serviceproviderhome",
+          element: <ServiceOverview />
+        },
+        {
+          path: "userHome",
+          element: <UserHome/>
+        },
+        {
+          path: "addservice",
+          element: <Addservices />
+        }
           ,
-          {
-            path:"myservices",
-            element:<MyServices/>
-          },
-          {
-            path:"profilesetting",
-            element:<ServiceProviderProfile/>
-          },
-           {
-            path:"settings",
-            element:<Settings/>
-          },
+        {
+          path: "myservices",
+          element: <MyServices />
+        },
+        {
+          path: "profilesetting",
+          element: <ServiceProviderProfile />
+        },
+        {
+          path: "settings",
+          element: <Settings />
+        },
         ]
       },
       {
@@ -105,7 +114,7 @@ const Routs = createBrowserRouter([
 
       {
         path: "manageservices",
-       
+
         element: (
           <PrivetRouts>
             <ManageService></ManageService>

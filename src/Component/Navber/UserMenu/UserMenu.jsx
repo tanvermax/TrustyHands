@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import useUserData from "../../../Hook/useUserData";
 
 const UserMenu = ({ logout, User }) => {
   const [open, setOpen] = useState(false);
   const menuRef = useRef(null);
+  const { profile } = useUserData();
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -28,24 +30,33 @@ const UserMenu = ({ logout, User }) => {
           alt="User"
           className="h-8 w-8 rounded-full border"
         />
-       <div className="flex flex-col items-start hidden md:flex text-xs">
-         <span className="hidden md:inline font-medium">{User.displayName || "Profile"}</span>
-        <span className="hidden md:inline font-medium">{User.email || "Profile"}</span>
-       </div>
+        <div className="flex flex-col items-start hidden md:flex text-xs">
+          <span className="hidden md:inline font-medium">{User.displayName || "Profile"}</span>
+          <span className="hidden md:inline font-medium">{User.email || "Profile"}</span>
+        </div>
       </button>
 
       {/* Dropdown */}
       {open && (
         <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
-         
+
           <NavLink
-            to="/dashboard"
+
+            to={
+              profile.role === "serviceProvider"
+                ? "/dashboard/serviceproviderhome"
+                : profile.role === "user"
+                  ? "/dashboard/userhome"
+                  : profile.role === "superadmin"
+                    ? "/dashboard/superadminhome"
+                    : "/dashboard/serviceproviderhome" // fallback
+            }
             className="block px-4 py-2 text-left hover:bg-gray-100"
             onClick={() => setOpen(false)}
           >
             Dashboard
           </NavLink>
-         
+
           <button
             onClick={logout}
             className="w-full text-left  px-4 py-2 text-red-600 hover:bg-gray-100"
