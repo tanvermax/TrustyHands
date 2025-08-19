@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import Swal from "sweetalert2";
 import './addservic.css'
+import useAuth from "../../Provider/useAuth";
 
 const Editservice = () => {
-    const {User}= useContext(AuthContext);
+    const {User}= useAuth();
 
   const data = useLoaderData();
 
@@ -33,7 +33,7 @@ const Editservice = () => {
       };
     // console.log(newService);
     
-    fetch(`https://trusty-hands-backend.vercel.app/addservice2/${loadData._id}`,{
+    fetch(`http://localhost:5000/addservice2/${loadData._id}`,{
         method : "PUT",
         headers: {
             "Content-Type": "application/json",

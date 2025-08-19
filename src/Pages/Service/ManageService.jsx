@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import axios from "axios";
+import useAuth from "../../Provider/useAuth";
 
 const ManageService = () => {
-  const { User, day } = useContext(AuthContext);
+  const { User, day } = useAuth()
   const [data, setData] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://trusty-hands-backend.vercel.app/addservice23?email=${User.email}`, {
+      .get(`http://localhost:5000/addservice23?email=${User.email}`, {
         withCredentials: "include",
       })
       .then((res) => setData(res.data));
@@ -28,7 +28,7 @@ const ManageService = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`https://trusty-hands-backend.vercel.app/addservice/${_id}`, {
+        fetch(`http://localhost:5000/addservice/${_id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

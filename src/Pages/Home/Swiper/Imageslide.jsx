@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css"; // Import Swiper CSS
-import AuthContext from "../../../AuthProvider.jsx/AuhtContext";
+import { AuthContext } from "../../../AuthProvider.jsx/AuthPovider";
 
 const Imageslide = () => {
   const {day}= useContext(AuthContext);

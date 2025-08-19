@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
 import { useLoaderData } from "react-router-dom";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import useAuth from "../../Provider/useAuth";
 
 const SignleServices = () => {
-  const { User, day } = useContext(AuthContext);
+  const { User, day } = useAuth();
   const loadData = useLoaderData();
 
   const handleService = async (e) => {
@@ -24,7 +24,7 @@ const SignleServices = () => {
     };
 
     try {
-      const res = await fetch("https://trusty-hands-backend.vercel.app/order", {
+      const res = await fetch("http://localhost:5000/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(orderDetails),

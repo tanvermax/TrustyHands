@@ -28,7 +28,10 @@ const UserMenu = ({ logout, User }) => {
           alt="User"
           className="h-8 w-8 rounded-full border"
         />
-        <span className="hidden md:inline font-medium">{User.displayName || "Profile"}</span>
+       <div className="flex flex-col items-start hidden md:flex text-xs">
+         <span className="hidden md:inline font-medium">{User.displayName || "Profile"}</span>
+        <span className="hidden md:inline font-medium">{User.email || "Profile"}</span>
+       </div>
       </button>
 
       {/* Dropdown */}

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import{ createContext, useEffect, useState } from "react";
 import auth from "../../firebase.init";
 import {
   createUserWithEmailAndPassword,
@@ -10,9 +10,12 @@ import {
   updateProfile,
 } from "firebase/auth";
 import axios from "axios";
-import AuthContext from "./AuhtContext";
+// import AuthContext from "./AuhtContext";
 import { toast } from "react-toastify";
 const gooogleprovider = new GoogleAuthProvider();
+
+export const AuthContext = createContext(null);
+
 
 const AuthPovider = ({ children }) => {
   const [User, setUser] = useState(null);
@@ -51,7 +54,7 @@ const AuthPovider = ({ children }) => {
       // console.log("state capture", currentUser);
       if (currentUser?.email) {
         const user = { email: currentUser.email }
-        axios.post('https://trusty-hands-backend.vercel.app/jwt', user, {
+        axios.post('http://localhost:5000/jwt', user, {
           withCredentials: true
         })
           .then(res =>
@@ -59,7 +62,7 @@ const AuthPovider = ({ children }) => {
           )
       }
       else {
-        axios.post('https://trusty-hands-backend.vercel.app/logout', {}, {
+        axios.post('http://localhost:5000/logout', {}, {
           withCredentials: true
         })
           .then(res => console.log("logou", res.data)

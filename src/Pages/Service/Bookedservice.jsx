@@ -1,16 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import axios from "axios";
+import useAuth from "../../Provider/useAuth";
 
 const Bookedservice = () => {
-  const { User, day } = useContext(AuthContext); // Adding day context for day/night mode
+  const { User, day } = useAuth() // Adding day context for day/night mode
   const [data, setData] = useState([]);
   (User.email);
 
   useEffect(() => {
     axios
-      .get(`https://trusty-hands-backend.vercel.app/order?email=${User.email}`, {
+      .get(`http://localhost:5000/order?email=${User.email}`, {
         withCredentials: true,
       })
       .then((res) => setData(res.data));

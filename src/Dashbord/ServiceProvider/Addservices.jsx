@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import axios from "axios";
 import { toast } from "react-toastify";
+import useAuth from "../../Provider/useAuth";
 
 const categories = [
   "Cleaning Services",
@@ -21,7 +21,7 @@ const categories = [
 ];
 
 const Addservices = () => {
-  const { User, day } = useContext(AuthContext);
+  const { User, day } = useAuth();
   const navigate = useNavigate();
 
   const maxChar = 100;
@@ -32,10 +32,11 @@ const Addservices = () => {
   const handleAddService = async (e) => {
     e.preventDefault();
     const form = e.target;
+
     const newService = {
       imageUrl: form.imageUrl.value,
       serviceName: form.serviceName.value,
-      category: form.category.value, // ✅ Category added
+      category: form.category.value,
       price: form.price.value,
       serviceArea: form.serviceArea.value,
       description,
@@ -45,19 +46,14 @@ const Addservices = () => {
     };
 
     try {
-      const res = await axios.post(
-        "https://trusty-hands-backend.vercel.app/addservice",
-        newService
-      );
-      console.log(res.data);
+      await axios.post("http://localhost:5000/addservice", newService);
       toast.success("Service Added Successfully!");
-
-      navigate("/allservices");
       form.reset();
       setDescription("");
       setCharCount(0);
+      navigate("/allservices");
     } catch (err) {
-      console.error("Error adding service:", err);
+      console.error(err);
       toast.error("Failed to add service");
     }
   };
@@ -74,119 +70,77 @@ const Addservices = () => {
   };
 
   return (
-    <div
-      className={`min-h-screen flex items-center justify-center px-4 py-10 ${
-        day ? "bg-black" : "bg-gray-100"
-      }`}
-    >
+    <div className={` flex items-start justify-center py-10 px-6 ${day ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-800"}`}>
       <Helmet>
         <title>Add Service - Service Sharing</title>
       </Helmet>
 
-      <div
-        className={`w-full max-w-md p-8 rounded-lg shadow-md ${
-          day ? "bg-gray-800 text-white" : "bg-white"
-        }`}
-      >
-        <h2 className="text-2xl font-bold text-center mb-6">Add New Service</h2>
+      <div className="w-full max-w-3xl">
+        <h2 className="text-3xl font-bold mb-6 text-center">Add New Service</h2>
 
-        <form onSubmit={handleAddService} className="space-y-4">
+        <form onSubmit={handleAddService} className="space-y-5 w-full">
           {[
-            {
-              name: "imageUrl",
-              label: "Image URL",
-              type: "text",
-              placeholder: "https://...",
-            },
-            {
-              name: "serviceName",
-              label: "Service Name",
-              type: "text",
-              placeholder: "e.g. AC Repair",
-            },
-            {
-              name: "price",
-              label: "Price",
-              type: "number",
-              placeholder: "e.g. 100",
-            },
-            {
-              name: "serviceArea",
-              label: "Service Area",
-              type: "text",
-              placeholder: "e.g. Dhanmondi, Dhaka",
-            },
+            { name: "imageUrl", label: "Image URL", type: "text", placeholder: "https://..." },
+            { name: "serviceName", label: "Service Name", type: "text", placeholder: "e.g. AC Repair" },
+            { name: "price", label: "Price ($)", type: "number", placeholder: "e.g. 100" },
+            { name: "serviceArea", label: "Service Area", type: "text", placeholder: "e.g. Dhanmondi, Dhaka" },
           ].map(({ name, label, type, placeholder }) => (
-            <div key={name}>
-              <label className="block text-sm font-medium mb-1">{label}</label>
+            <div key={name} className="flex flex-col w-full">
+              <label className="mb-1 font-medium">{label}</label>
               <input
                 name={name}
                 type={type}
                 placeholder={placeholder}
                 required
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                  day
-                    ? "bg-gray-700 border-gray-600 text-white"
-                    : "bg-white border-gray-300 text-gray-800"
+                className={`w-full px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                  day ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-800"
                 }`}
               />
             </div>
           ))}
 
-          {/* ✅ Category Dropdown */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Category</label>
+          {/* Category */}
+          <div className="flex flex-col w-full">
+            <label className="mb-1 font-medium">Category</label>
             <select
               name="category"
               required
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary ${
-                day
-                  ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-800"
+              className={`w-full px-4 py-2 rounded-md border focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                day ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-800"
               }`}
             >
               <option value="">-- Select Category --</option>
               {categories.map((cat, idx) => (
-                <option key={idx} value={cat}>
-                  {cat}
-                </option>
+                <option key={idx} value={cat}>{cat}</option>
               ))}
             </select>
           </div>
 
-          {/* ✅ Description */}
-          <div>
-            <label className="block text-sm font-medium mb-1">Description</label>
+          {/* Description */}
+          <div className="flex flex-col w-full">
+            <label className="mb-1 font-medium">Description</label>
             <textarea
               name="description"
-              rows="3"
+              rows="4"
               value={description}
               onChange={handleDescriptionChange}
               placeholder="Brief service description"
               required
-              className={`w-full px-3 py-2 border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary ${
-                day
-                  ? "bg-gray-700 border-gray-600 text-white"
-                  : "bg-white border-gray-300 text-gray-800"
+              className={`w-full px-4 py-2 rounded-md border resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 ${
+                day ? "bg-gray-800 border-gray-700 text-white" : "bg-white border-gray-300 text-gray-800"
               }`}
             ></textarea>
-            <div className="flex justify-between text-sm mt-1">
-              <span>
-                {charCount}/{maxChar}
-              </span>
-              {errorMessage && (
-                <span className="text-red-500">{errorMessage}</span>
-              )}
+            <div className="flex justify-between mt-1 text-sm">
+              <span>{charCount}/{maxChar}</span>
+              {errorMessage && <span className="text-red-500">{errorMessage}</span>}
             </div>
           </div>
 
           <button
             type="submit"
             disabled={description.length > maxChar}
-            className={`w-full py-2 rounded-md font-semibold transition-colors duration-200 ${
-              day
-                ? "bg-blue-500 text-white hover:bg-blue-600"
-                : "bg-blue-700 text-white hover:bg-blue-800"
+            className={`w-full py-3 rounded-md font-semibold text-lg transition-colors duration-200 ${
+              day ? "bg-indigo-600 hover:bg-indigo-700 text-white" : "bg-indigo-700 hover:bg-indigo-800 text-white"
             }`}
           >
             Add Service

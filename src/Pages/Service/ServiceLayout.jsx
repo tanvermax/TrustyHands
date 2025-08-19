@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Helmet } from "react-helmet-async";
 import axios from "axios";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
 
 const ServiceLayout = () => {
   const { User, day } = useContext(AuthContext); // Assuming `day` is part of AuthContext
@@ -10,7 +10,7 @@ const ServiceLayout = () => {
 
   useEffect(() => {
     axios
-      .get(`https://trusty-hands-backend.vercel.app/order?email2=${User.email}`, {
+      .get(`http://localhost:5000/order?email2=${User.email}`, {
         headers: {
           Authorization: `Barer ${localStorage.getItem("token")}`,
         },
@@ -25,7 +25,7 @@ const ServiceLayout = () => {
     const form = e.target;
     const serviceStatus = form.serviceStatus.value;
 
-    fetch(`https://trusty-hands-backend.vercel.app/order/${id}`, {
+    fetch(`http://localhost:5000/order/${id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

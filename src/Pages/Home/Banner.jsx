@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import Slider from "react-slick";
 import { Link } from "react-router-dom";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./sevice.css";
+import useAuth from "../../Provider/useAuth";
 
 const Banner = () => {
-  const { day } = useContext(AuthContext);
+  const { day } = useAuth()
 
   const settings = {
     dots: true,

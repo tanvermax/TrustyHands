@@ -1,63 +1,68 @@
-// DashboardLayout.jsx
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
+import useUserData from "../Hook/useUserData";
+import { 
+  FaHome, FaUser, FaPlusCircle, FaServicestack, FaStar, 
+  FaUsers, FaCog, FaHeadset, FaFileContract, FaShoppingCart 
+} from "react-icons/fa";
 
 const DashboardLayout = () => {
+  const { profile } = useUserData();
+
+  if (!profile) {
+    return <div className="p-6">Loading profile...</div>;
+  }
+
+  // Define sidebar links based on role
+  const serviceProviderLinks = [
+    { name: "Overview", to: "/dashboard", icon: <FaHome /> },
+    { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
+    { name: "Add Service", to: "/dashboard/addservice", icon: <FaPlusCircle /> },
+    { name: "My Services", to: "/dashboard/myservices", icon: <FaServicestack /> },
+    { name: "Reviews", to: "/dashboard/reviews", icon: <FaStar /> },
+    { name: "Customers", to: "/dashboard/customers", icon: <FaUsers /> },
+    { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
+    { name: "Support 24/7", to: "/dashboard/support", icon: <FaHeadset /> },
+    { name: "Terms and Conditions", to: "/dashboard/terms", icon: <FaFileContract /> },
+  ];
+
+  const userLinks = [
+    { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
+    { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
+    { name: "My Orders", to: "/dashboard/myorders", icon: <FaShoppingCart /> },
+    { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
+    { name: "Support 24/7", to: "/dashboard/support", icon: <FaHeadset /> },
+    { name: "Terms and Conditions", to: "/dashboard/terms", icon: <FaFileContract /> },
+  ];
+
+  const linksToRender = profile.role === "serviceProvider" ? serviceProviderLinks : userLinks;
+
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Left Sidebar */}
-
-
       {/* Right Content */}
       <main className="flex-1 p-6 overflow-auto">
         <Outlet />
       </main>
+
+      {/* Sidebar */}
       <aside className="w-64 bg-white shadow-lg p-6 flex flex-col">
-        <h2 className="text-xl font-bold mb-6">Dashboard</h2>
+        <h2 className="text-xl font-bold mb-6">
+          {profile.role ? profile.role : <span className="loading loading-dots loading-sm"></span>} Dashboard
+        </h2>
         <nav className="flex flex-col space-y-3">
-          <NavLink
-            to="/dashboard"
-            end
-            className={({ isActive }) =>
-              `px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
-            }
-          >
-            Overview
-          </NavLink>
-          <NavLink
-            to="/dashboard/addservice"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
-            }
-          >
-            Add Service
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/myservices"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
-            }
-          >
-            My Services
-          </NavLink>
-
-          <NavLink
-            to="/dashboard/profilesetting"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
-            }
-          >
-            Profile
-          </NavLink>
-          <NavLink
-            to="/dashboard/settings"
-            className={({ isActive }) =>
-              `px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
-            }
-          >
-            Settings
-          </NavLink>
+          {linksToRender.map((link) => (
+            <NavLink
+              key={link.to}
+              to={link.to}
+              end
+              className={({ isActive }) =>
+                `flex items-center gap-3 px-4 py-2 rounded hover:bg-gray-200 ${isActive ? "bg-gray-200 font-semibold" : ""}`
+              }
+            >
+              <span className="text-lg">{link.icon}</span>
+              <span>{link.name}</span>
+            </NavLink>
+          ))}
         </nav>
       </aside>
     </div>

@@ -4,8 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import "aos/dist/aos.css";
 import Aos from "aos";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
 
 const Register = () => {
   const { registerwihtgmail, day, googlelogin, setUser, updateUser } =
@@ -35,7 +35,7 @@ const Register = () => {
       .then((result) => {
         setUser(result.user);
         updateUser({ displayName: name, photoURL: photoURL });
-        fetch("https://trusty-hands-backend.vercel.app/user", {
+        fetch("http://localhost:5000/user", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

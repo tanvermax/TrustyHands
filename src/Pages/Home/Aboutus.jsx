@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
 
 const Aboutus = () => {
   const { day } = useContext(AuthContext);

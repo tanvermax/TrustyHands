@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import logo from "./../../assets/logo5.png";
 import logo1 from "./../../assets/logo2.png";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import useAuth from "../../Provider/useAuth";
 
 const Footer = () => {
-  const { day } = useContext(AuthContext);
-
+  // const { day } = useContext(AuthContext);
+  const { day } = useAuth()
   const textColor = day ? "text-white" : "text-gray-700";
   const headingColor = day ? "text-white" : "text-black";
 

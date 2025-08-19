@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from "react";
 import 'aos/dist/aos.css';
-import { FcGoogle } from "react-icons/fc";
+// import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import Aos from "aos";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import { toast } from "react-toastify";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
+import SocialLogin from "./SocialLogin";
 
 const Login = () => {
   const { googlelogin, loginwihtpass, day } = useContext(AuthContext);
@@ -97,12 +98,7 @@ const Login = () => {
               </form>
               <div className="divider my-4">OR</div>
               <div className="flex flex-col items-center gap-4">
-                <button
-                  onClick={googlelogin}
-                  className="flex items-center justify-center gap-2 w-full py-2 border border-gray-300 rounded-md hover:bg-gray-100 transition"
-                >
-                  <FcGoogle className="text-2xl" /> Login with Google
-                </button>
+                <SocialLogin/>
                 <Link
                   to="/register"
                   className="text-sm text-primary-600 hover:underline"

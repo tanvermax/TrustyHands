@@ -1,13 +1,12 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import Banner from "./Banner";
 import PopularService from "./PopularService";
 import Section1 from "./Section1";
 import Section2 from "./Section2";
 import Section3 from "./Section3";
 import { Helmet } from "react-helmet-async";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
-import Testimoni from "./Testimoni";
 import Imageslide from "./Swiper/Imageslide";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
 
 const Home = () => {
   const { User } = useContext(AuthContext);

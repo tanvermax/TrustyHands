@@ -2,16 +2,16 @@ import React, { useContext, useEffect, useState } from "react";
 import "./sevice.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
 import { ServiceCard } from "../Service/AllService";
+import useAuth from "../../Provider/useAuth";
 // import ServiceCard from "../../Component/ServiceCard/ServiceCard";
 
 const PopularService = () => {
-  const { day } = useContext(AuthContext);
+  const { day } = useAuth();
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch("https://trusty-hands-backend.vercel.app/addservice?limit=6")
+    fetch("http://localhost:5000/addservice?limit=6")
       .then((res) => res.json())
       .then((data) => setData(data));
   }, []);

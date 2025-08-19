@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { BsMic } from "react-icons/bs";
 import { CiSearch } from "react-icons/ci";
 import { Link, useLoaderData } from "react-router-dom";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import { AuthContext } from "../../AuthProvider.jsx/AuthPovider";
 
 export const ServiceCard = ({ card, day }) => {
   return (

@@ -1,6 +1,6 @@
-import React, { useContext } from "react";
+import  { useContext } from "react";
 import { ImPlay2 } from "react-icons/im";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import useAuth from "../../Provider/useAuth";
 
 const steps = [
   {
@@ -24,7 +24,7 @@ const steps = [
 ];
 
 const Section2 = () => {
-  const { day } = useContext(AuthContext);
+  const { day } = useAuth();
 
   return (
     <section className={`py-14 ${day ? "bg-gray-900" : "bg-white"}`}>

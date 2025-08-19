@@ -91,7 +91,7 @@ const Routs = createBrowserRouter([
         element: <AllService></AllService>,
         errorElement: <Errorpage></Errorpage>,
 
-        loader: () => fetch("https://trusty-hands-backend.vercel.app/addservice"),
+        loader: () => fetch("http://localhost:5000/addservice"),
       },
       {
         path: "servicetodo",
@@ -132,7 +132,7 @@ const Routs = createBrowserRouter([
         errorElement: <Errorpage></Errorpage>,
 
         loader: ({ params }) =>
-          fetch(`https://trusty-hands-backend.vercel.app/addservice/${params.id}`),
+          fetch(`http://localhost:5000/addservice/${params.id}`),
       },
       {
         path: "addservice2/:id",
@@ -142,7 +142,7 @@ const Routs = createBrowserRouter([
           </PrivetRouts>
         ),
         loader: ({ params }) =>
-          fetch(`https://trusty-hands-backend.vercel.app/addservice2/${params.id}`),
+          fetch(`http://localhost:5000/addservice2/${params.id}`),
         errorElement: <Errorpage></Errorpage>,
       },
     ],

@@ -4,7 +4,7 @@ import { MdOutlineWash, MdOutlineSupportAgent } from "react-icons/md";
 import { GiGloves } from "react-icons/gi";
 import 'aos/dist/aos.css';
 import Aos from "aos";
-import AuthContext from "../../AuthProvider.jsx/AuhtContext";
+import useAuth from "../../Provider/useAuth";
 
 const features = [
   {
@@ -26,7 +26,7 @@ const features = [
 ];
 
 const Section1 = () => {
-  const { day } = useContext(AuthContext);
+  const { day } = useAuth();
 
   useEffect(() => {
     Aos.init({

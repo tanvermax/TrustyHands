@@ -3,8 +3,8 @@ import Nabver from "../Component/Navber/Nabver";
 
 import Fotter from "../Component/Fotter/Fotter";
 import { useContext, useEffect, useState } from "react";
-import AuthContext from "../AuthProvider.jsx/AuhtContext";
 import { ToastContainer } from "react-toastify";
+import { AuthContext } from "../AuthProvider.jsx/AuthPovider";
 
 
 const Mainlayout = () => {
