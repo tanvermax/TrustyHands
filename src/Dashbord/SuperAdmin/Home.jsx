@@ -8,6 +8,7 @@ const SuperAdminHome= () => {
     orders: [],
     services: [],
   });
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const SuperAdminHome= () => {
     fetchDashboardData();
   }, []);
 
+  
   if (loading) {
     return <p className="text-center mt-10 text-lg">Loading dashboard data...</p>;
   }

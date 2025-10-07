@@ -31,6 +31,7 @@ const SignleServices = () => {
       });
       const data = await res.json();
       if (data.insertedId) {
+        console.log(data)
         alert("Service booked successfully!");
         document.getElementById("my_modal_5").close();
       }

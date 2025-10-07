@@ -23,6 +23,10 @@ import Settings from "../src/Dashbord/ServiceProvider/Setting";
 import ContactUs from "../src/Pages/Home/Contactus";
 import SuperAdminHome from "../src/Dashbord/SuperAdmin/Home";
 import UserHome from "../src/Dashbord/UserDasbord/serHome";
+import Order from "../src/Dashbord/UserDasbord/UserOrder/Order";
+import Userriview from "../src/Dashbord/UserDasbord/UserReview/Userriview";
+import Support from "../src/Dashbord/UserDasbord/UserSupport/Usersupport";
+import TermsAndConditions from "../src/Dashbord/UserDasbord/Termsandcondotion/Terms";
 
 const Routs = createBrowserRouter([
   {
@@ -62,10 +66,7 @@ const Routs = createBrowserRouter([
           path: "serviceproviderhome",
           element: <ServiceOverview />
         },
-        {
-          path: "userHome",
-          element: <UserHome/>
-        },
+        
         {
           path: "addservice",
           element: <Addservices />
@@ -82,6 +83,27 @@ const Routs = createBrowserRouter([
         {
           path: "settings",
           element: <Settings />
+        },
+        // user routes
+        {
+          path: "userHome",
+          element: <UserHome />,
+        },
+        {
+          path: "myorders",
+          element: <Order />
+        },
+        {
+          path: "myreviews",
+          element: <Userriview />
+        },
+        {
+          path: "support",
+          element: <Support />
+        },
+        {
+          path: "terms",
+          element: <TermsAndConditions />
         },
         ]
       },

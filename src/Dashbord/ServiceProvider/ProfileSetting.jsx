@@ -3,6 +3,7 @@ import useUserData from "../../Hook/useUserData";
 
 const ServiceProviderProfile = () => {
   const { profile, setProfile, loading, error, updateProfile } = useUserData();
+  console.log(profile)
   const [warning, setWarning] = useState(false);
 
   if (loading) return <div>Loading...</div>;
@@ -47,7 +48,7 @@ const ServiceProviderProfile = () => {
   return (
     <div className=" bg-gray-100 p-6">
       <h1 className="text-3xl font-bold mb-6 text-gray-800">Profile Settings</h1>
-
+      <p>ID : {profile._id}</p>
       {warning && (
         <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-6">
           ⚠️ Please complete all required information to fully set up your account.
@@ -109,6 +110,17 @@ const ServiceProviderProfile = () => {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
               />
             </div>
+            {/* <div>
+              <label className="font-medium mb-1 block">Id</label>
+              <input
+                type="number"
+                name="id"
+                defaultValue={profile._id}
+                value={profile._id || ""}
+                onChange={handleChange}
+                className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
+              />
+            </div> */}
 
             {/* Account Recovery Email */}
             <div>

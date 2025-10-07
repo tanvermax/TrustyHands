@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import useAuth from "../Provider/useAuth";
 
-const useUserData = () => {
+const 
+useUserData = () => {
   const { User } = useAuth();
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+        console.log(profile)
 
   useEffect(() => {
     if (!User?.email) return <><p>loading</p></>;
