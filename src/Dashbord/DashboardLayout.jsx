@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import useUserData from "../Hook/useUserData";
+import { FaCartPlus } from "react-icons/fa6";
 import { 
   FaHome, FaUser, FaPlusCircle, FaServicestack, FaStar, 
   FaUsers, FaCog, FaHeadset, FaFileContract, FaShoppingCart, 
@@ -30,6 +31,7 @@ const DashboardLayout = () => {
   const userLinks = [
     { name: "Home", to: "/dashboard/userHome", icon: <FaHome /> },
     { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
+    { name: "Post for Service", to: "/dashboard/postrequest", icon: <FaCartPlus /> },
     { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
     { name: "My Orders", to: "/dashboard/myorders", icon: <FaShoppingCart /> },
     { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
@@ -39,10 +41,10 @@ const DashboardLayout = () => {
 
   const superAdminLinks = [
     { name: "Home", to: "/dashboard/superadminhome", icon: <FaHome /> },
-    { name: "Manage Users", to: "/dashboard/manage-users", icon: <FaUsersCog /> },
+    { name: "Manage Users", to: "/dashboard/manageusers", icon: <FaUsersCog /> },
     { name: "Manage Service Providers", to: "/dashboard/manage-service-providers", icon: <FaUsers /> },
     { name: "All Services", to: "/dashboard/all-services", icon: <FaServicestack /> },
-    { name: "Orders", to: "/dashboard/orders", icon: <FaShoppingCart /> },
+    { name: "Orders", to: "/dashboard/ordersMange", icon: <FaShoppingCart /> },
     { name: "Reports", to: "/dashboard/reports", icon: <FaFileAlt /> },
     { name: "Mail / Messages", to: "/dashboard/messages", icon: <FaEnvelope /> },
     { name: "Analytics", to: "/dashboard/analytics", icon: <FaChartLine /> },

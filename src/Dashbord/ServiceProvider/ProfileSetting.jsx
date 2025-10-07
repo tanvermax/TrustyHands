@@ -55,7 +55,7 @@ const ServiceProviderProfile = () => {
         </div>
       )}
 
-      <div className="bg-white p-8 rounded-lg max-w-6xl mx-auto shadow-md">
+      <div className="bg-white p-8 rounded-lg max-w-7xl mx-auto shadow-md">
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
 
           {/* Left Column */}

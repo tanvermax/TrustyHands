@@ -27,6 +27,13 @@ import Order from "../src/Dashbord/UserDasbord/UserOrder/Order";
 import Userriview from "../src/Dashbord/UserDasbord/UserReview/Userriview";
 import Support from "../src/Dashbord/UserDasbord/UserSupport/Usersupport";
 import TermsAndConditions from "../src/Dashbord/UserDasbord/Termsandcondotion/Terms";
+import PostRequest from "../src/Dashbord/UserDasbord/ServiceRequest/ServiceRequest";
+import ManageUser from "../src/Dashbord/SuperAdmin/ManageUser/ManageUser";
+import ManageServiceProvider from "../src/Dashbord/SuperAdmin/ManageservicePRovider/ManageServiceProvider";
+import ManangService from "../src/Dashbord/SuperAdmin/ManageService/ManangService";
+import AdminOrderManagement from "../src/Dashbord/SuperAdmin/AdminOrderManagement/AdminOrderManagement";
+import ReportManagement from "../src/Dashbord/SuperAdmin/ReportManagement/ReportManagement";
+import AdminMessageInbox from "../src/Dashbord/SuperAdmin/AdminMessageInbox/AdminMessageInbox";
 
 const Routs = createBrowserRouter([
   {
@@ -60,13 +67,38 @@ const Routs = createBrowserRouter([
         errorElement: <Errorpage></Errorpage>,
         children: [{
           path: "superadminhome",
-          element: <SuperAdminHome />
+          element: <SuperAdminHome />,
+
+        },
+        {
+          path: "manageusers",
+          element: <ManageUser />
+        },
+        {
+          path: "manage-service-providers",
+          element: <ManageServiceProvider />
+        },
+        {
+          path: "ordersMange",
+          element: <AdminOrderManagement />
+        },
+        {
+          path:"reports",
+          element:<ReportManagement/>
+        },
+        {
+          path: "all-services",
+          element: <ManangService />
+        },
+        {
+          path:"messages",
+          element:<AdminMessageInbox/>
         },
         {
           path: "serviceproviderhome",
           element: <ServiceOverview />
         },
-        
+
         {
           path: "addservice",
           element: <Addservices />
@@ -105,6 +137,10 @@ const Routs = createBrowserRouter([
           path: "terms",
           element: <TermsAndConditions />
         },
+        {
+          path: "postrequest",
+          element: <PostRequest />
+        }
         ]
       },
       {

@@ -8,7 +8,7 @@ useUserData = () => {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-        console.log(profile)
+        // console.log(profile)
 
   useEffect(() => {
     if (!User?.email) return <><p>loading</p></>;
