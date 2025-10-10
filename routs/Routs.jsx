@@ -34,6 +34,10 @@ import ManangService from "../src/Dashbord/SuperAdmin/ManageService/ManangServic
 import AdminOrderManagement from "../src/Dashbord/SuperAdmin/AdminOrderManagement/AdminOrderManagement";
 import ReportManagement from "../src/Dashbord/SuperAdmin/ReportManagement/ReportManagement";
 import AdminMessageInbox from "../src/Dashbord/SuperAdmin/AdminMessageInbox/AdminMessageInbox";
+import AdminAnalyticsDashboard from "../src/Dashbord/SuperAdmin/AdminAnalyticsDashboard/AdminAnalyticsDashboard";
+import ServiceProviderOrders from "../src/Dashbord/ServiceProvider/Order/ServiceProviderOrders";
+import SupportRequests from "../src/Dashbord/ServiceProvider/ServiceSupport/SupportRequests";
+import AdminSupportPanel from "../src/Dashbord/SuperAdmin/Supportmessage/AdminSupportPanel";
 
 const Routs = createBrowserRouter([
   {
@@ -71,6 +75,10 @@ const Routs = createBrowserRouter([
 
         },
         {
+          path:"adminsupport",
+          element:<AdminSupportPanel/>
+        },
+        {
           path: "manageusers",
           element: <ManageUser />
         },
@@ -83,22 +91,32 @@ const Routs = createBrowserRouter([
           element: <AdminOrderManagement />
         },
         {
-          path:"reports",
-          element:<ReportManagement/>
+          path: "reports",
+          element: <ReportManagement />
         },
         {
           path: "all-services",
           element: <ManangService />
         },
         {
-          path:"messages",
-          element:<AdminMessageInbox/>
+          path: "messages",
+          element: <AdminMessageInbox />
+        }, {
+          path: "analytics",
+          element: <AdminAnalyticsDashboard />
         },
+        // servicep[rovider]
         {
           path: "serviceproviderhome",
           element: <ServiceOverview />
+        },{
+          path:"providersupport",
+          element:<SupportRequests/>
         },
-
+        {
+          path: "orders",
+          element: <ServiceProviderOrders />
+        },
         {
           path: "addservice",
           element: <Addservices />
