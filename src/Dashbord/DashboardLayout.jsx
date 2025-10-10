@@ -24,7 +24,7 @@ const DashboardLayout = () => {
   // --- INTEGRATE THE NEW HOOK ---
   const { counts, isNotificationLoading } = useNotifications(profile?.role, profile?.email);
   // ------------------------------
-// console.log(counts)
+console.log(counts)
   if (!profile) {
     return <div className="p-6">Loading profile...</div>;
   }

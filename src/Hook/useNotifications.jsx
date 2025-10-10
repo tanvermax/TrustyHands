@@ -2,23 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import useUserData from './useUserData';
 
 const API_BASE_URL = 'https://trusty-hands-backend.vercel.app'; 
 
 // Function to determine the correct notification endpoint based on role
-const getEndpoint = (role) => {
+const getEndpoint = (role,email) => {
+
     if (role === 'superadmin') return `${API_BASE_URL}/notifications/admin`;
-    if (role === 'serviceProvider') return `${API_BASE_URL}/notifications/provider`;
-    if (role === 'user') return `${API_BASE_URL}/notifications/user`;
+    if (role === 'serviceProvider') return `${API_BASE_URL}/notifications/provider/${email}`;
+    if (role === 'user') return `${API_BASE_URL}/notifications/user/${email}`;
     return null;
 };
 
 const useNotifications = (role, email) => {
+
+    const { profile, loading: isAuthLoading } = useUserData();
+
     const [counts, setCounts] = useState({});
     const [isNotificationLoading, setIsNotificationLoading] = useState(true);
 
     const fetchCounts = async () => {
-        const endpoint = getEndpoint(role);
+        const endpoint = getEndpoint(role,profile?.email);
         if (!endpoint || !email) {
             setIsNotificationLoading(false);
             return;
