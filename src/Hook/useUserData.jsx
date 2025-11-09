@@ -32,7 +32,7 @@ useUserData = () => {
 
   const updateProfile = async (updatedData) => {
     try {
-      const response = await axios.put(`https://trusty-hands-backend.vercel.app/user/${User.email}`, updatedData);
+      const response = await axios.put(`http://localhost:5000/user/${User.email}`, updatedData);
       setProfile(response.data);
       return { success: true };
     } catch (err) {

@@ -1,14 +1,13 @@
 import React, { useState } from "react";
 import useUserData from "../../Hook/useUserData";
+import { toast } from "react-toastify";
 
 const ServiceProviderProfile = () => {
   const { profile, setProfile, loading, error, updateProfile } = useUserData();
-  console.log(profile)
   const [warning, setWarning] = useState(false);
 
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error loading profile</div>;
-
   // Check if any required fields are missing
   const checkIncompleteFields = (data) => {
     const requiredFields = [
@@ -16,6 +15,7 @@ const ServiceProviderProfile = () => {
       "phone",
       "photoURL",
       "address",
+      
       "accountRecoveryEmail",
       "shopAddress",
       "totalWorkers",
@@ -39,15 +39,16 @@ const ServiceProviderProfile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const result = await updateProfile(profile);
-    if (result.success) alert("Profile updated successfully!");
-    else alert("Failed to update profile");
+    console.log(result)
+    toast.success("Profile updated successfully!")
+
   };
 
   if (!profile) return <div className="p-6">Loading profile...</div>;
 
   return (
     <div className=" bg-gray-100 p-6">
-      <h1 className="text-3xl font-bold mb-6 text-gray-800">Profile Settings</h1>
+      <h1 className="text-3xl font-bold mb-6 text-gray-800"><span className="text-teal-600 uppercase">{profile.role}</span> Profile Settings</h1>
       <p>ID : {profile._id}</p>
       {warning && (
         <div className="bg-yellow-100 text-yellow-800 p-3 rounded mb-6">
@@ -110,7 +111,7 @@ const ServiceProviderProfile = () => {
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
               />
             </div>
-            {/* <div>
+            <div>
               <label className="font-medium mb-1 block">Id</label>
               <input
                 type="number"
@@ -120,7 +121,7 @@ const ServiceProviderProfile = () => {
                 onChange={handleChange}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
               />
-            </div> */}
+            </div>
 
             {/* Account Recovery Email */}
             <div>
@@ -151,11 +152,12 @@ const ServiceProviderProfile = () => {
           {/* Right Column */}
           <div className="flex flex-col gap-4">
             <div>
-              <label className="font-medium mb-1 block">Address</label>
+              <label className="font-medium mb-1 block">Address/Area</label>
               <input
                 type="text"
-                name="address"
-                value={profile.address || ""}
+                name="area"
+                defaultValue={profile.area || ""}
+
                 onChange={handleChange}
                 className="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none text-gray-800"
               />

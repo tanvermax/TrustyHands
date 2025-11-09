@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./sevice.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
-import { ServiceCard } from "../Service/AllService";
 import useAuth from "../../Provider/useAuth";
+import { ServiceCard } from "../Service/Servicecrad";
 // import ServiceCard from "../../Component/ServiceCard/ServiceCard";
 
 const PopularService = () => {
