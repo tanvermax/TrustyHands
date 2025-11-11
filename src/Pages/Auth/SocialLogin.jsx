@@ -25,6 +25,7 @@ const SocialLogin = () => {
         email: user.email,
         photoURL: user.photoURL,
         role: "user",
+        wallet:50
       });
 
       toast.success(`Welcome, ${userName}!`);

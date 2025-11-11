@@ -17,6 +17,8 @@ const Mainlayout = () => {
       setLoading(false);
     }, 2000);
   }, []);
+  const url = window.location.href;
+
   return (
     <div className="items-center text-center ">
       {loading ? (
@@ -24,12 +26,15 @@ const Mainlayout = () => {
       ) : (
         <div className={`${day ? "bg-black" : "bg-white"}`}>
           <Nabver></Nabver>
-            <ToastContainer />
+          <ToastContainer />
 
           <div className=" min-h-[calc(100vh-300px)]  ">
             <Outlet></Outlet>
           </div>
-          <Fotter></Fotter>
+          {
+            url.includes("dashboard") ? " " : <Fotter></Fotter>
+          }
+
         </div>
       )}
     </div>

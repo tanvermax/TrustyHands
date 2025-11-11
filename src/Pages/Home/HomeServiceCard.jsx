@@ -1,30 +1,14 @@
 import { Link } from "react-router-dom";
 
-export const ServiceCard = ({ card, day, userArea }) => {
+export const HomeServiceCard = ({ card, day, userArea }) => {
+
+   
 
 
-  // --- Smart area match ---
-  const normalize = (text) =>
-    text
-      ?.toLowerCase()
-      .split(",")
-      .map((s) => s.trim())
-      .filter(Boolean) || [];
-
-  const serviceAreas = normalize(card.serviceArea);
-  const userAreas = normalize(userArea);
-
-  const isAvailable = userAreas.some((ua) =>
-    serviceAreas.some((sa) => sa.includes(ua) || ua.includes(sa))
-  );
 
   return (
     <div
-      className={`bg-gradient-to-br from-[#fafafa] to-[#5f615f44] rounded-2xl p-4 shadow-xl transition-all duration-300 ${
-        isAvailable
-          ? "hover:shadow-2xl hover:-translate-y-1"
-          : "opacity-60 grayscale"
-      }`}
+      className={`bg-gradient-to-br from-[#fafafa] to-[#5f615f44] rounded-2xl p-4 shadow-xl transition-all duration-300 `}
     >
       <div className="relative overflow-hidden rounded-xl">
         <img
@@ -55,21 +39,17 @@ export const ServiceCard = ({ card, day, userArea }) => {
               src={card.providerphoto}
               alt={card.providername}
             />
-            <span className="text-sm ">{card.providername}</span>
+            <span className="text-sm text-gray-300">{card.providername}</span>
           </div>
         </div>
 
-        {isAvailable ? (
+       
           <Link to={`/addservice/${card._id}`}>
             <button className="w-full mt-5 bg-primary  py-2 rounded-xl font-semibold hover:bg-primary-dark transition">
               View Details
             </button>
           </Link>
-        ) : (
-          <p className="w-full mt-5 text-center bg-gray-600  py-2 rounded-xl font-semibold">
-            ❌ This service is not available in your area
-          </p>
-        )}
+       
       </div>
     </div>
   );

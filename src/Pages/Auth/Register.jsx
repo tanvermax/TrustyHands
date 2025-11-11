@@ -31,20 +31,21 @@ const Register = () => {
     const photoURL = form.photourl.value;
     const area = form.area.value;
     const role = form.role.value || "user";
+    const wallet = 50;
 
     // --- Client-Side Validation for better UX ---
-    if (password.length < 6) {
-      return toast.error("Password must be at least 6 characters long.");
-    }
-    if (!/[A-Z]/.test(password)) {
-      return toast.error("Password must contain at least one capital letter.");
-    }
-    if (!/[!@#$%^&*]/.test(password)) {
-      return toast.error("Password must contain at least one special character (!@#$%^&*).");
-    }
+    // if (password.length < 6) {
+    //   return toast.error("Password must be at least 6 characters long.");
+    // }
+    // if (!/[A-Z]/.test(password)) {
+    //   return toast.error("Password must contain at least one capital letter.");
+    // }
+    // if (!/[!@#$%^&*]/.test(password)) {
+    //   return toast.error("Password must contain at least one special character (!@#$%^&*).");
+    // }
     // --- End Validation ---
 
-    const user = { name, email, password, photoURL, area, role };
+    const user = { name, email, password, photoURL, area,wallet, role };
 
     registerwihtgmail(email, password)
       .then((result) => {

@@ -38,6 +38,7 @@ import AdminAnalyticsDashboard from "../src/Dashbord/SuperAdmin/AdminAnalyticsDa
 import ServiceProviderOrders from "../src/Dashbord/ServiceProvider/Order/ServiceProviderOrders";
 import SupportRequests from "../src/Dashbord/ServiceProvider/ServiceSupport/SupportRequests";
 import AdminSupportPanel from "../src/Dashbord/SuperAdmin/Supportmessage/AdminSupportPanel";
+import WalletRecharge from "../src/Dashbord/UserDasbord/WalletRecharge/WalletRecharge";
 
 const Routs = createBrowserRouter([
   {
@@ -138,6 +139,10 @@ const Routs = createBrowserRouter([
         {
           path: "userHome",
           element: <UserHome />,
+        },
+        {
+          path:"wallet",
+          element:<WalletRecharge/>
         },
         {
           path: "myorders",

@@ -17,6 +17,7 @@ import {
   FaUsersCog, FaChartLine, FaEnvelope, FaFileAlt
 
 } from "react-icons/fa";
+import { GiWallet } from "react-icons/gi";
 
 const DashboardLayout = () => {
   const { profile } = useUserData();
@@ -56,6 +57,7 @@ console.log(counts)
     { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
     // Key matches 'myorders' in user notifications API
     { name: "My Orders", to: "/dashboard/myorders", icon: <FaShoppingCart /> },
+    { name: "Wallet", to: "/dashboard/wallet", icon: <GiWallet /> },
     { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
     { name: "Support 24/7", to: "/dashboard/support", icon: <FaHeadset /> },
     { name: "Terms and Conditions", to: "/dashboard/terms", icon: <FaFileContract /> },

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { FaGift, FaTags, FaStar } from "react-icons/fa";
+import UTransactionHistory from "./UTransactionHistory/UTransactionHistory";
 
 const UserHome = ({ userEmail }) => {
   const [offers, setOffers] = useState([]);
@@ -87,6 +88,9 @@ const UserHome = ({ userEmail }) => {
           <FaStar className="mr-2" /> Recommended Services
         </h2>
         <p>Check back soon for personalized recommendations!</p>
+      </div>
+      <div className=" overflow-auto h-80 ">
+        <UTransactionHistory/>
       </div>
     </div>
   );

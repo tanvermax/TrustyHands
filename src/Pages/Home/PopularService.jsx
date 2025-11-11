@@ -3,7 +3,7 @@ import "./sevice.css";
 import Aos from "aos";
 import "aos/dist/aos.css";
 import useAuth from "../../Provider/useAuth";
-import { ServiceCard } from "../Service/Servicecrad";
+import { HomeServiceCard } from "./HomeServiceCard";
 // import ServiceCard from "../../Component/ServiceCard/ServiceCard";
 
 const PopularService = () => {
@@ -45,7 +45,7 @@ const PopularService = () => {
         data-aos="fade-up"
       >
         {data.map((card) => (
-          <ServiceCard key={card._id} card={card} day={day}/>
+          <HomeServiceCard key={card._id} card={card} day={day}/>
           // <ServiceCard  />
         ))}
       </div>
