@@ -8,7 +8,7 @@ const ServiceProviderOrders = () => {
     const [isLoadingOrders, setIsLoadingOrders] = useState(false);
     const [error, setError] = useState(null);
 
-    const API_BASE_URL = 'https://trusty-hands-backend.vercel.app';
+    const API_BASE_URL = 'http://localhost:5000';
 
     // Function to check if service time has expired
     const isServiceTimeExpired = (serviceDate) => {
@@ -79,7 +79,8 @@ const ServiceProviderOrders = () => {
             });
 
             if (response.data) {
-                alert(response.data);
+                console.log(response)
+                alert(response.data.message);
                 fetchOrders();
             } else {
                 alert(`Error: ${response.data}`);
@@ -96,7 +97,7 @@ const ServiceProviderOrders = () => {
         }
 
         try {
-            const orderToUpdate = orders.find(o => o.orderid === orderId);
+            const orderToUpdate = orders.find(o => o._id === orderId);
 
             if (!orderToUpdate) {
                 return alert("Order not found in local list.");
@@ -115,7 +116,7 @@ const ServiceProviderOrders = () => {
                 return alert("Order data incomplete. Cannot complete order (Missing ID).");
             }
 
-            const response = await axios.put(`${API_BASE_URL}/order/${mongoObjectId}`, {
+            const response = await axios.put(`${API_BASE_URL}/order/complete/provider/${mongoObjectId}`, {
                 serviceStatus: 'Completed'
             }, {
                 withCredentials: true
@@ -195,7 +196,7 @@ const ServiceProviderOrders = () => {
                                 const timeRemaining = getTimeRemaining(order.serviceDate);
                                 
                                 return (
-                                    <tr key={order.orderid}>
+                                    <tr key={order._id}>
                                         <td className="px-6 py-4 whitespace-nowrap">
                                             <div className="flex flex-col">
                                                 <span className="text-sm font-medium text-gray-900">
@@ -245,7 +246,7 @@ const ServiceProviderOrders = () => {
                                                 <>
                                                     {canTakeOrder ? (
                                                         <button
-                                                            onClick={() => handleTakeOrder(order.orderid)}
+                                                            onClick={() => handleTakeOrder(order._id)}
                                                             className="text-indigo-600 hover:text-indigo-900 mr-2 border border-indigo-600 px-3 py-1 rounded text-xs"
                                                         >
                                                             Take Order
@@ -260,13 +261,13 @@ const ServiceProviderOrders = () => {
                                             {order.serviceStatus === 'In Progress' && (
                                                 <>
                                                     <button
-                                                        onClick={() => handleCompleteOrder(order.orderid)}
+                                                        onClick={() => handleCompleteOrder(order._id)}
                                                         className="text-green-600 hover:text-green-900 mr-2 border border-green-600 px-3 py-1 rounded text-xs"
                                                     >
                                                         Complete
                                                     </button>
                                                     <button
-                                                        onClick={() => handleCancelOrder(order.orderid)}
+                                                        onClick={() => handleCancelOrder(order._id)}
                                                         className="text-red-600 hover:text-red-900 border border-red-600 px-3 py-1 rounded text-xs"
                                                     >
                                                         Cancel
