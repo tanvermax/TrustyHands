@@ -40,6 +40,7 @@ import SupportRequests from "../src/Dashbord/ServiceProvider/ServiceSupport/Supp
 import AdminSupportPanel from "../src/Dashbord/SuperAdmin/Supportmessage/AdminSupportPanel";
 import WalletRecharge from "../src/Dashbord/UserDasbord/WalletRecharge/WalletRecharge";
 import ServiceProviderRequests from "../src/Dashbord/ServiceProvider/ServiceProviderRequests/ServiceProviderRequests";
+import WithdrawFunds from "../src/Dashbord/ServiceProvider/WithdrawFunds/WithdrawFunds";
 
 const Routs = createBrowserRouter([
   {
@@ -122,6 +123,10 @@ const Routs = createBrowserRouter([
         {
           path: "addservice",
           element: <Addservices />
+        },
+        {
+          path: "withdraw",
+          element: <WithdrawFunds />
         }
         ,{
           path: "servicerequest",
