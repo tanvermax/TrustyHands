@@ -49,7 +49,7 @@ const WalletRecharge = () => {
             setMessage('⏳ Processing recharge... Please wait.');
 
             // Axios automatically handles JSON stringification for the body
-            const response = await axios.post('http://localhost:5000/recharge', {
+            const response = await axios.post('https://trusty-hands-backend.vercel.app/recharge', {
                 amount: amount,
                 userId: profile?._id,
                 method: selectedMethod,

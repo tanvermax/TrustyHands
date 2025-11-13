@@ -39,6 +39,7 @@ import ServiceProviderOrders from "../src/Dashbord/ServiceProvider/Order/Service
 import SupportRequests from "../src/Dashbord/ServiceProvider/ServiceSupport/SupportRequests";
 import AdminSupportPanel from "../src/Dashbord/SuperAdmin/Supportmessage/AdminSupportPanel";
 import WalletRecharge from "../src/Dashbord/UserDasbord/WalletRecharge/WalletRecharge";
+import ServiceProviderRequests from "../src/Dashbord/ServiceProvider/ServiceProviderRequests/ServiceProviderRequests";
 
 const Routs = createBrowserRouter([
   {
@@ -121,6 +122,10 @@ const Routs = createBrowserRouter([
         {
           path: "addservice",
           element: <Addservices />
+        }
+        ,{
+          path: "servicerequest",
+          element: <ServiceProviderRequests />
         }
           ,
         {

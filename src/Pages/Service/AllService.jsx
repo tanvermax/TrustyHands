@@ -33,7 +33,7 @@ const AllService = () => {
       try {
         setLoadingCategories(true);
         // Use your specific backend URL here (replace with your Vercel URL if deployed)
-        const response = await axios.get("http://localhost:5000/services/names");
+        const response = await axios.get("https://trusty-hands-backend.vercel.app/services/names");
 
         // Assuming the backend returns an array of strings: ['Plumbing Services', 'Electrical Services', ...]
         setServiceCategories(response.data);

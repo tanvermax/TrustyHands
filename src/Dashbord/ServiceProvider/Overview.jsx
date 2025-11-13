@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import useUserData from "../../Hook/useUserData";
+import ProviderTransactions from "./ProviderTransactions";
 
 const API_BASE_URL = 'https://trusty-hands-backend.vercel.app'; // Match your backend URL
 
@@ -133,6 +134,9 @@ const ServiceOverview = () => {
                 </table>
             </div>
         )}
+      </div>
+      <div>
+        <ProviderTransactions/>
       </div>
     </div>
   );

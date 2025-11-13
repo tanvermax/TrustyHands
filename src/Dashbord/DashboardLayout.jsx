@@ -43,6 +43,7 @@ console.log(counts)
     { name: "Order", to: "/dashboard/orders", icon: <FaOpencart /> },
     { name: "Reviews", to: "/dashboard/reviews", icon: <MdOutlineStarRate /> },
     { name: "Customers", to: "/dashboard/customers", icon: <FaUsers /> },
+    { name: "User Request", to: "/dashboard/servicerequest", icon: <FaCog /> },
     { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
     // Key matches 'providersupport' in provider notifications API
     { name: "Support 24/7", to: "/dashboard/providersupport", icon: <FaHeadset /> },
