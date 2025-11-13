@@ -41,8 +41,8 @@ console.log(counts)
     { name: "My Services", to: "/dashboard/myservices", icon: <FaServicestack /> },
     // Key matches 'orders' in provider notifications API
     { name: "Order", to: "/dashboard/orders", icon: <FaOpencart /> },
-    { name: "Reviews", to: "/dashboard/reviews", icon: <MdOutlineStarRate /> },
-    { name: "Customers", to: "/dashboard/customers", icon: <FaUsers /> },
+    // { name: "Reviews", to: "/dashboard/reviews", icon: <MdOutlineStarRate /> },
+    // { name: "Customers", to: "/dashboard/customers", icon: <FaUsers /> },
     { name: "User Request", to: "/dashboard/servicerequest", icon: <FaCog /> },
     { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
     // Key matches 'providersupport' in provider notifications API
@@ -55,7 +55,7 @@ console.log(counts)
     { name: "Profile", to: "/dashboard/profilesetting", icon: <FaUser /> },
     // Key matches 'postrequest' in user notifications API
     { name: "Post for Service", to: "/dashboard/postrequest", icon: <FaCartPlus /> },
-    { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
+    // { name: "My Reviews", to: "/dashboard/myreviews", icon: <FaStar /> },
     // Key matches 'myorders' in user notifications API
     { name: "My Orders", to: "/dashboard/myorders", icon: <FaShoppingCart /> },
     { name: "Wallet", to: "/dashboard/wallet", icon: <GiWallet /> },
