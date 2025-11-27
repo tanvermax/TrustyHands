@@ -89,9 +89,9 @@ console.log(counts)
         : userLinks;
 
   return (
-    <div className="flex h-screen bg-gray-100">
+    <div className="flex  h-screen bg-gray-100">
       {/* Sidebar */}
-      <aside className="w-64 bg-white shadow-2xl p-6 flex flex-col h-screen z-10">
+      <aside className="w-64 bg-white shadow-2xl overflow-auto p-6 flex flex-col h-screen z-10">
         <h2 className="text-xl font-bold mb-8 text-indigo-700">
           {profile.role ? profile.role.toUpperCase() : <span className="loading loading-dots loading-sm"></span>} DASHBOARD
         </h2>
