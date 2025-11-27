@@ -110,7 +110,7 @@ console.log(counts)
                 className={({ isActive }) => {
                   const activeClass = isActive
                     ? "bg-indigo-600 text-white shadow-lg"
-                    : "text-gray-700 hover:bg-gray-100 hover:text-indigo-600";
+                    : "text-gray-700 hover:bg-gray-100 md:text-[12px] text-[8px]  hover:text-indigo-600";
 
                   const notificationClass = hasNotification && !isActive
                     ? "border-r-4 border-red-500"
