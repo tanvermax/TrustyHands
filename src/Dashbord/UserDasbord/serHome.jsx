@@ -4,29 +4,29 @@ import { FaGift, FaTags, FaStar } from "react-icons/fa";
 import UTransactionHistory from "./UTransactionHistory/UTransactionHistory";
 
 const UserHome = ({ userEmail }) => {
-  const [offers, setOffers] = useState([]);
-  const [coupons, setCoupons] = useState([]);
+  // const [offers, setOffers] = useState([]);
+  // const [coupons, setCoupons] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch offers and coupons (dummy endpoints, replace with your API)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const offersRes = await axios.get("https://trusty-hands-backend.vercel.app/offers");
-        const couponsRes = await axios.get("https://trusty-hands-backend.vercel.app/coupons", {
-          params: { email: userEmail },
-        });
-        setOffers(offersRes.data || []);
-        setCoupons(couponsRes.data || []);
-      } catch (err) {
-        console.error("Failed to fetch user data:", err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const offersRes = await axios.get("https://trusty-hands-backend.vercel.app/offers");
+  //       const couponsRes = await axios.get("https://trusty-hands-backend.vercel.app/coupons", {
+  //         params: { email: userEmail },
+  //       });
+  //       setOffers(offersRes.data || []);
+  //       setCoupons(couponsRes.data || []);
+  //     } catch (err) {
+  //       console.error("Failed to fetch user data:", err);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    fetchData();
-  }, [userEmail]);
+  //   fetchData();
+  // }, [userEmail]);
 
   if (loading) {
     return <p className="text-center mt-10 text-lg">Loading your dashboard...</p>;
@@ -41,7 +41,7 @@ const UserHome = ({ userEmail }) => {
         <h2 className="text-xl font-semibold mb-4 flex items-center">
           <FaGift className="mr-2" /> Special Offers
         </h2>
-        {offers.length > 0 ? (
+        {/* {offers.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {offers.map((offer) => (
               <div
@@ -56,7 +56,7 @@ const UserHome = ({ userEmail }) => {
           </div>
         ) : (
           <p>No offers available at the moment.</p>
-        )}
+        )} */}
       </div>
 
       {/* Coupons Section */}
@@ -64,7 +64,7 @@ const UserHome = ({ userEmail }) => {
         <h2 className="text-xl font-semibold mb-4 flex items-center">
           <FaTags className="mr-2" /> Your Coupons
         </h2>
-        {coupons.length > 0 ? (
+        {/* {coupons.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {coupons.map((coupon) => (
               <div
@@ -79,7 +79,7 @@ const UserHome = ({ userEmail }) => {
           </div>
         ) : (
           <p>You don't have any coupons yet.</p>
-        )}
+        )} */}
       </div>
 
       {/* Recommended Section */}

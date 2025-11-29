@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Clock, DollarSign, MapPin, CheckCircle, Mail, User } from 'lucide-react';
 import useUserData from '../../../Hook/useUserData';
+import { toast } from 'react-toastify';
 
 const ServiceProviderRequests = () => {
     // Replace with your actual backend base URL
-    const API_BASE_URL = 'https://trusty-hands-backend.vercel.app';
+    // const API_BASE_URL = 'https://trusty-hands-backend.vercel.app';
 
     const { profile, loading: isAuthLoading } = useUserData();
     const [requests, setRequests] = useState([]);
@@ -13,13 +14,13 @@ const ServiceProviderRequests = () => {
     const [error, setError] = useState(null);
     const [acceptedRequestId, setAcceptedRequestId] = useState(null); // Tracks the ID of the request whose contact info is revealed
 
-
+    // console.log(profile)
     const fetchRequests = async () => {
         setIsLoading(true);
         setError(null);
         try {
             // Assuming your backend has an endpoint to fetch 'Open' requests
-            const response = await axios.get(`${API_BASE_URL}/service-requests?status=Open`, {
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/service-requests?status=Open`, {
                 withCredentials: true
             });
 
@@ -38,6 +39,7 @@ const ServiceProviderRequests = () => {
             setIsLoading(false);
         }
     };
+    console.log(requests)
 
     useEffect(() => {
         if (!isAuthLoading && profile) {
@@ -48,58 +50,90 @@ const ServiceProviderRequests = () => {
 
     const handleAcceptRequest = async (request) => {
         const uniqueId = request.uniqueId;
+        console.log(uniqueId)
 
         if (!window.confirm(`Are you sure you want to accept the request for '${request.servicename}'?`)) {
             return;
         }
 
-        // Ensure we have the provider's email/ID for the backend to link the provider to the order
-        if (!profile || !profile.email) {
-            return console.error("Provider profile data missing. Cannot accept request.");
-        }
+        if (!profile || !profile.email) return console.error("Provider profile missing");
 
         try {
-            // IMPORTANT: This API call must be implemented on your Express server.
-            // It should update the status and likely create a new 'order' record.
-            const response = await axios.post(`${API_BASE_URL}/request/accept/${uniqueId}`, {
-                serviceProviderId: profile.uid,
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/request/accept/${uniqueId}`, {
+                serviceProviderId: profile._id,
                 serviceProviderEmail: profile.email
-            }, {
-                withCredentials: true
             });
 
-            if (response.data.success) {
-                // On successful acceptance, set the accepted ID to reveal contact info
+
+            if (response.data) {
+                console.log(response)
+                toast.success("Request accepted! Contact info revealed.");
                 setAcceptedRequestId(uniqueId);
+                //  const serviceDateTime = `${form.serviceDate.value}T${form.serviceTime.value}`;
 
-                // Alert with a custom message instead of the default alert()
-                const messageBox = document.getElementById('messageBox');
-                messageBox.innerHTML = `<div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Success! </strong>
-                    <span class="block sm:inline">${response.data.message || "Request accepted successfully. Contact information is now visible."}</span>
-                </div>`;
-                setTimeout(() => messageBox.innerHTML = '', 4000);
+                // const orderDetails = {
+                //     orderid: requests._id,
+                //     servicename: requests.servicename,
+                //     instruction: requests.instruction,
+                //     serviceprovider: profile.name,
+                //     serviceprovideremail: profile.email,
+                //     cost: Number(requests.budget),
+                //     serviceStatus: "Pending",
+                //     ordergivenusername: requests.ordergivenusername,
+                //     ordergivenuseremail: requests.ordergivenuseremail,
+                //     serviceDate: requests.postedAt,
+                //     userId: requests.servicename,
+                //     escrowStatus: "DeductedFromUser"
+                // };
+                const orderDetails = {
+                    orderid: request.uniqueId,
+                    servicename: request.servicename,
+                    instruction: request.instruction,
+                    serviceprovider: profile.name,
+                    serviceprovideremail: profile.email,
+                    cost: Number(request.budget),
+                    serviceStatus: "Pending",
+                    ordergivenusername: request.ordergivenusername,
+                    ordergivenuseremail: request.ordergivenuseremail,
+                    serviceDate: request.serviceDate,
+                    userId: request.userid,
+                    escrowStatus: "DeductedFromUser"
+                };
 
-                // Optionally refetch to update the list, but for simulation, we keep it visible
-                // fetchRequests(); 
+                console.log(orderDetails)
+                try {
+                    const res = await axios.post("https://trusty-hands-backend.vercel.app/order", orderDetails)
+                    console.log(res)
+                    if (res.data) {
+                        console.log(res.data);
+                        toast.success("Service booked successfully!");
+                    } else {
+                        toast.error("Booking failed. Please try again.");
+                    }
+                } catch (err) {
+                    console.error("Booking error:", err);
+                    alert("An error occurred during booking. Check console.");
+                }
+
+                // Update the request in state with the returned contact info
+                setRequests((prev) =>
+                    prev.map(req =>
+                        req.uniqueId === uniqueId
+                            ? { ...req, contactInfo: response.data.contactInfo }
+                            : req
+                    )
+                );
+
             } else {
-                const messageBox = document.getElementById('messageBox');
-                messageBox.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                    <strong class="font-bold">Error! </strong>
-                    <span class="block sm:inline">${response.data.message || "Failed to accept request."}</span>
-                </div>`;
-                setTimeout(() => messageBox.innerHTML = '', 4000);
+                alert(response.data.message);
             }
+
         } catch (err) {
             console.error("Accept request error:", err);
-            const messageBox = document.getElementById('messageBox');
-            messageBox.innerHTML = `<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                <strong class="font-bold">System Error! </strong>
-                <span class="block sm:inline">Could not connect to the server or request failed.</span>
-            </div>`;
-            setTimeout(() => messageBox.innerHTML = '', 4000);
+            alert("Could not accept request. Try again later.");
         }
     };
+
 
     // Helper function to format date
     const formatDate = (dateString) => {
@@ -115,6 +149,11 @@ const ServiceProviderRequests = () => {
     if (!profile) {
         return <div className="p-8 text-center text-lg text-red-500">You must be logged in as a service provider to view requests.</div>;
     }
+    // console.log(profile)
+    if (!profile.phone) {
+        return <div className="p-8 text-center text-lg text-red-500">please provide you phone number.</div>;
+    }
+
 
     if (isLoading) {
         return <div className="p-8 text-center text-lg text-gray-500">Loading open requests...</div>;
@@ -162,6 +201,10 @@ const ServiceProviderRequests = () => {
                                     <MapPin className="w-5 h-5 mr-3 text-red-500 flex-shrink-0" />
                                     <span className="font-medium">Area:</span> {request.area}
                                 </div>
+                                <div className="flex items-center text-gray-700">
+                                    <MapPin className="w-5 h-5 mr-3 text-red-500 flex-shrink-0" />
+                                    <span className="font-medium">serviceDate :</span> {request.serviceDate}
+                                </div>
 
                                 <div className="flex items-center text-gray-700">
                                     <DollarSign className="w-5 h-5 mr-3 text-green-500 flex-shrink-0" />
@@ -176,16 +219,20 @@ const ServiceProviderRequests = () => {
 
                             {/* Action and Contact Section */}
                             <div className="pt-4 border-t mt-4">
-                                {acceptedRequestId === request.uniqueId ? (
+                                {acceptedRequestId === request.uniqueId && request.contactInfo ? (
                                     <div className="bg-indigo-50 p-4 rounded-lg">
                                         <h4 className="font-bold text-indigo-700 mb-2 flex items-center">
                                             <CheckCircle className="w-5 h-5 mr-2" /> Request Accepted!
                                         </h4>
                                         <p className="text-sm text-indigo-600 font-semibold mb-1 flex items-center">
-                                            <User className="w-4 h-4 mr-2" /> {request.ordergivenusername}
+                                            <User className="w-4 h-4 mr-2" /> {request.contactInfo.name}
+                                        </p>
+                                        
+                                        <p className="text-sm text-indigo-600 flex items-center">
+                                            <Mail className="w-4 h-4 mr-2" /> {request.contactInfo.email}
                                         </p>
                                         <p className="text-sm text-indigo-600 flex items-center">
-                                            <Mail className="w-4 h-4 mr-2" /> {request.ordergivenuseremail}
+                                            <Clock className="w-4 h-4 mr-2" /> {request.contactInfo.phone}
                                         </p>
                                         <p className="text-xs text-indigo-500 mt-2">Contact the user immediately to confirm service details.</p>
                                     </div>
@@ -197,6 +244,7 @@ const ServiceProviderRequests = () => {
                                         Accept Request
                                     </button>
                                 )}
+
                             </div>
                         </div>
                     ))}

@@ -72,8 +72,8 @@ console.log(counts)
     { name: "All Services", to: "/dashboard/all-services", icon: <FaServicestack /> },
     // Key matches 'ordersMange' in admin notifications API
     { name: "Orders", to: "/dashboard/ordersMange", icon: <FaShoppingCart /> },
-    { name: "Reports", to: "/dashboard/reports", icon: <FaFileAlt /> },
-    { name: "Mail / Messages", to: "/dashboard/messages", icon: <FaEnvelope /> },
+    // { name: "Report?s", to: "/dashboard/reports", icon: <FaFileAlt /> },
+    // { name: "Mail / Messages", to: "/dashboard/messages", icon: <FaEnvelope /> },
     { name: "Analytics", to: "/dashboard/analytics", icon: <FaChartLine /> },
     { name: "Settings", to: "/dashboard/settings", icon: <FaCog /> },
     // Key matches 'adminsupport' in admin notifications API

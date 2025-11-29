@@ -41,6 +41,8 @@ import AdminSupportPanel from "../src/Dashbord/SuperAdmin/Supportmessage/AdminSu
 import WalletRecharge from "../src/Dashbord/UserDasbord/WalletRecharge/WalletRecharge";
 import ServiceProviderRequests from "../src/Dashbord/ServiceProvider/ServiceProviderRequests/ServiceProviderRequests";
 import WithdrawFunds from "../src/Dashbord/ServiceProvider/WithdrawFunds/WithdrawFunds";
+import FAQ from "../src/Dashbord/UserDasbord/UserSupport/FAQ";
+import TrackIssue from "../src/Dashbord/UserDasbord/UserSupport/TrackIssue";
 
 const Routs = createBrowserRouter([
   {
@@ -144,6 +146,14 @@ const Routs = createBrowserRouter([
         {
           path: "settings",
           element: <Settings />
+        },
+        {
+          path: "support/faq",
+          element: <FAQ />
+        },
+         {
+          path: "support/status",
+          element: <TrackIssue />
         },
         // user routes
         {

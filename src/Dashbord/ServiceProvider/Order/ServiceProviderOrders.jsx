@@ -166,10 +166,10 @@ const ServiceProviderOrders = () => {
     }
 
     if (error) return <div className="text-center py-10 text-red-600">{error}</div>;
-
+console.log(orders)
     return (
         <div className="p-4">
-            <h2 className="text-2xl font-bold mb-6">Your Service Orders</h2>
+            <h2 className="text-2xl font-bold mb-6">Your Service Orders : {orders.length}</h2>
 
             {orders.length === 0 ? (
                 <p className="text-gray-500">You have no orders assigned yet.</p>

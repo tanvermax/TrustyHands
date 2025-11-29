@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useUserData from '../../../Hook/useUserData'; // Your custom hook
 import { toast } from 'react-toastify';
+import UserOrder from './Userorder';
 
 const PostRequest = () => {
     const { profile, loading: isProfileLoading } = useUserData();
@@ -11,35 +12,35 @@ const PostRequest = () => {
         servicename: '',
         instruction: '',
         area: '',
+        serviceDate: '',
         budget: '',
     });
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [message, setMessage] = useState('');
     // 💡 Renamed to uniqueCategories for clarity; stores only unique names
-    const [uniqueCategories, setUniqueCategories] = useState([]); 
-
-// category
+    const [uniqueCategories, setUniqueCategories] = useState([]);
+    // category
     useEffect(() => {
-         const fetchCategories = async () => {
+        const fetchCategories = async () => {
             try {
                 // Fetching from the Vercel backend as specified in your code
-                const response = await axios.get(`https://trusty-hands-backend.vercel.app/addservice`); 
-                
+                const response = await axios.get(`https://trusty-hands-backend.vercel.app/addservice`);
+
                 if (response.data && Array.isArray(response.data)) {
                     // 1. Map the array to get only the category names
                     const allCategories = response.data.map(service => service.category);
-                    
+
                     // 2. Use a Set to extract only the unique values
                     const uniqueNames = [...new Set(allCategories)];
-                    
+
                     // 3. Update the state with the unique names
                     setUniqueCategories(uniqueNames);
                 } else {
                     setUniqueCategories([]);
                 }
             } catch (error) {
-                 console.error("Error fetching categories:", error);
-                 setUniqueCategories([]); // Set empty array on error
+                console.error("Error fetching categories:", error);
+                setUniqueCategories([]); // Set empty array on error
             }
         };
         fetchCategories();
@@ -49,7 +50,7 @@ const PostRequest = () => {
     // Note: Logging the state inside the component body is fine for debugging, 
     // but the console will show multiple updates (null, then the data).
     // console.log("Unique Categories:", uniqueCategories); 
-    
+
     // ... (rest of the component logic)
     const handleChange = (e) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -70,13 +71,19 @@ const PostRequest = () => {
             ...formData,
             ordergivenusername: profile.name || 'User',
             ordergivenuseremail: profile.email,
+            ordergivenphone: profile.phone || '',
+            userid: profile._id || '',
+            postedAt: new Date().toISOString(),
+            status: 'Pending',
         };
+
 
         try {
             const response = await axios.post(`${API_BASE_URL}/servicerequest`, requestPayload);
 
             if (response.data.success) {
                 toast.success("Service Request posted succesfully")
+
                 setMessage({ type: 'success', text: 'Service request posted successfully! Service providers will review it shortly.' });
                 setFormData({
                     servicename: '',
@@ -180,6 +187,22 @@ const PostRequest = () => {
                         className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500"
                     />
                 </div>
+                {/* Service Date & Time */}
+                <div>
+                    <label htmlFor="serviceDate" className="block text-sm font-medium text-gray-700">
+                        Preferred Service Date & Time <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                        type="datetime-local"
+                        id="serviceDate"
+                        name="serviceDate"
+                        value={formData.serviceDate}
+                        onChange={handleChange}
+                        required
+                        className="mt-1 block w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500 bg-white"
+                    />
+                </div>
+
 
                 {/* Budget (Optional) */}
                 <div>
@@ -207,6 +230,9 @@ const PostRequest = () => {
                     {isSubmitting ? 'Submitting Request...' : 'Post Service Request'}
                 </button>
             </form>
+            <div>
+                <UserOrder />
+            </div>
         </div>
     );
 };
