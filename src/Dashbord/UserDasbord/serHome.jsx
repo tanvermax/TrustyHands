@@ -6,7 +6,7 @@ import UTransactionHistory from "./UTransactionHistory/UTransactionHistory";
 const UserHome = ({ userEmail }) => {
   // const [offers, setOffers] = useState([]);
   // const [coupons, setCoupons] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [loading, setLoading] = useState(true);
 
   // Fetch offers and coupons (dummy endpoints, replace with your API)
   // useEffect(() => {
@@ -28,9 +28,9 @@ const UserHome = ({ userEmail }) => {
   //   fetchData();
   // }, [userEmail]);
 
-  if (loading) {
-    return <p className="text-center mt-10 text-lg">Loading your dashboard...</p>;
-  }
+  // if (loading) {
+  //   return <p className="text-center mt-10 text-lg">Welcome to Dashboard</p>;
+  // }
 
   return (
     <div className="p-6">

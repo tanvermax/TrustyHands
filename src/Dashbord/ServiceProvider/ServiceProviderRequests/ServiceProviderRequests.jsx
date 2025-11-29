@@ -56,7 +56,8 @@ const ServiceProviderRequests = () => {
             return;
         }
 
-        if (!profile || !profile.email) return console.error("Provider profile missing");
+        if (!profile || !profile.email)
+             return console.error("Provider profile missing");
 
         try {
             const response = await axios.post(`${import.meta.env.VITE_API_URL}/request/accept/${uniqueId}`, {
